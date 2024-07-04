@@ -1,16 +1,22 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controller.UserController;
+import model.Person;
+import model.User;
 
 public class RegisterScreen {
+    UserController con = UserController.getInstance();
 
     public RegisterScreen() {
         JFrame frame = new JFrame("Register Form");
@@ -58,6 +64,32 @@ public class RegisterScreen {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String name = usernameField.getText();
+                String email = emailField.getText();
+                String pass = new String(passwordField.getPassword());
+                ArrayList<User> listUser = con.getAllUserList();
+                User newUser = new User(0, name, email, pass, "user", listUser.size() + 1);
+                //User newUser = new User(name, pass, listUser.size() + 1);
+                boolean cek = con.addNewUser(newUser);
+                if (cek) {
+                    JOptionPane.showMessageDialog(frame, "Register Berhasil", "Success",
+                            JOptionPane.WARNING_MESSAGE);
+                    new MenuAwal();
+                    frame.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Register Gagal", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                
+                // Person person = cntrl.getUser(fieldEmail.getText(),String.valueOf(fieldPass.getPassword()));
+                // if (person != null) {
+                //     JOptionPane.showMessageDialog(null, "Login Sukses", "Info", JOptionPane.INFORMATION_MESSAGE);
+                //     frame.dispose();
+                //     new GUIHomeUser();
+                // } else {
+                //     JOptionPane.showMessageDialog(null, "Login Gagal. Email atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
+                //     frame.dispose();
+                // }
                 
             }
         });
