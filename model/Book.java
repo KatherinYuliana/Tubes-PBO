@@ -11,7 +11,7 @@ public class Book {
     private int book_id;
     private String book_title;
     private String author;
-    private int publication_year;
+    private String publication_year;
     private String genre;
     private String category;
     private double rating;
@@ -23,7 +23,7 @@ public class Book {
 
     }
 
-    public Book(int book_id, String book_title, String author, int publication_year, String genre, String category,
+    public Book(int book_id, String book_title, String author, String publication_year, String genre, String category,
             double rating,
             String sinopsis, String book_status, String book_cover) {
         this.book_id = book_id;
@@ -38,7 +38,7 @@ public class Book {
         this.book_cover = book_cover;
     }
 
-    public Book(int book_id, String book_title, String author, int publication_year, String genre, String category, double rating, 
+    public Book(int book_id, String book_title, String author, String publication_year, String genre, String category, double rating, 
             String sinopsis, String book_status, String book_cover, int i) {
         this.book_id = book_id;
         this.book_title = book_title;
@@ -76,11 +76,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getPublication_year() {
+    public String getPublication_year() {
         return publication_year;
     }
 
-    public void setPublication_year(int publication_year) {
+    public void setPublication_year(String publication_year) {
         this.publication_year = publication_year;
     }
 

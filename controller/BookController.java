@@ -43,7 +43,8 @@ public class BookController {
             statement.setInt(1, book.getBook_id());
             statement.setString(2, book.getBook_title());
             statement.setString(3, book.getAuthor());
-            statement.setInt(4, book.getPublication_year());
+            statement.setString(4, book.getPublication_year());
+            //statement.setInt(4, book.getPublication_year());
             //statement.setDate(4, new java.sql.Date(book.getPublication_year().getTime()));  // Convert java.util.Date to java.sql.Date
             //statement.setString(5, book.getGenre().name());  // Convert enum to string
             statement.setString(5, book.getGenre());
@@ -84,7 +85,8 @@ public class BookController {
                 book.setBook_id(resultSet.getInt("book_id"));
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
-                book.setPublication_year(resultSet.getInt("publication_year"));
+                book.setPublication_year(resultSet.getString("publication_year"));
+                //book.setPublication_year(resultSet.getInt("publication_year"));
                 //book.setPublication_year(resultSet.getDate("publication_year"));
                 //book.setGenre(GenreEnum.valueOf(resultSet.getString("genre")));
                 book.setGenre(resultSet.getString("genre"));
@@ -127,9 +129,9 @@ public class BookController {
         return books;
     }
 
-    public ArrayList<Book> getBookInfo() {
+    public ArrayList<Book> getBookInfo(int id) {
         conn.connect();
-        String query = "SELECT * FROM book WHERE book_id=?";
+        String query = "SELECT * FROM book WHERE book_id = '" + id + "'";
         ArrayList<Book> books = new ArrayList<>();
         try {
             Statement statement = conn.con.createStatement();
@@ -139,7 +141,8 @@ public class BookController {
                 book.setBook_id(resultSet.getInt("book_id"));
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
-                book.setPublication_year(resultSet.getInt("publication_year"));
+                book.setPublication_year(resultSet.getString("publication_year"));
+                //book.setPublication_year(resultSet.getInt("publication_year"));
                 //book.setPublication_year(resultSet.getDate("publication_year"));
                 //book.setGenre(GenreEnum.valueOf(resultSet.getString("genre")));
                 book.setGenre(resultSet.getString("genre"));

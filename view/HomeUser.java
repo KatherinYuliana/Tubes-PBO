@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.awt.Image;
 
 public class HomeUser {
@@ -93,10 +95,62 @@ public class HomeUser {
         image1.setBounds(50, 160, 100, 150);
         panel.add(image1);
 
+        image1.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                int id = 4;
+                //String title = "One Piece";
+                new BookInfoScreen(id);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
         //JLabel image2 = new JLabel("Sherlock Holmes");
         JLabel image2 = new JLabel(scaleImage("pictures/Sherlock Holmes.jpg", 100, 150));
         image2.setBounds(200, 160, 100, 150);
         panel.add(image2);
+
+        image2.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                int id = 3;
+                //String title = "";
+                new BookInfoScreen(id);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
         
         JLabel image3 = new JLabel("gambar 3");
         image3.setBounds(350, 160, 100, 150);

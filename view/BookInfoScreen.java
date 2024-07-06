@@ -12,7 +12,15 @@ import java.awt.event.ActionEvent;
 
 public class BookInfoScreen {
     BookController con = BookController.getInstance();
-    public BookInfoScreen() {
+
+    private static ImageIcon scaleImage(String imagePath, int width, int height) {
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
+    }
+
+    public BookInfoScreen(int id) {
         JFrame frame = new JFrame("Book Info");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +35,8 @@ public class BookInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new HomeUser();
-                frame.setVisible(false);
+                frame.dispose();
+                //frame.setVisible(false);
             }
         });
 
@@ -63,6 +72,21 @@ public class BookInfoScreen {
         categoryLabel.setBounds(220, 170, 200, 30);
         frame.add(categoryLabel);
 
+        // Rating label
+        JLabel ratingLabel = new JLabel("Rating:");
+        ratingLabel.setBounds(220, 190, 200, 30);
+        frame.add(ratingLabel);
+        
+        // Status label
+        JLabel statusLabel = new JLabel("Status:");
+        statusLabel.setBounds(220, 210, 200, 30);
+        frame.add(statusLabel);
+
+        // Sinopsis label
+        JLabel sinopsisLabel = new JLabel("Sinopsis:");
+        sinopsisLabel.setBounds(220, 230, 200, 30);
+        frame.add(sinopsisLabel);
+
         // Add to favorite button
         JButton favoriteButton = new JButton("Tambah Favorit");
         favoriteButton.setBounds(50, 280, 150, 30);
@@ -75,18 +99,45 @@ public class BookInfoScreen {
             }
         });
 
-        ArrayList<Book> showAllBook = con.getBookInfo();
+       
+        ArrayList<Book> showAllBook = con.getBookInfo(id);
 
         Object[][] data = new Object[showAllBook.size()][4];
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
 
+            String cover = book.getBook_cover();
+            JLabel bookCover2 = new JLabel(scaleImage(cover, 150, 200));
+            bookCover2.setBounds(50, 70, 150, 200);
+            frame.add(bookCover2);
+
             String judul = book.getBook_title();
             JLabel titleLabel = new JLabel(judul);
-            titleLabel.setBounds(220, 70, 200, 30);
+            titleLabel.setBounds(220, 70, 500, 30);
             titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
             frame.add(titleLabel);
+
+            String author = book.getAuthor();
+            JLabel authorLabel2 = new JLabel(author);
+            authorLabel2.setBounds(265, 110, 200, 30);
+            frame.add(authorLabel2);
+
+            String tahun = book.getPublication_year().toString();
+            JLabel yearLabel2 = new JLabel(tahun);
+            yearLabel2.setBounds(320, 130, 200, 30);
+            frame.add(yearLabel2);
+
+            String genre = book.getGenre();
+            JLabel genreLabel2 = new JLabel(genre);
+            genreLabel2.setBounds(265, 150, 200, 30);
+            frame.add(genreLabel2);
+
+            // JLabel bookCover2 = new JLabel(cover);
+            // bookCover2.setBounds(50, 70, 150, 200);
+            // //bookCover2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            // frame.add(bookCover2);
+
             // data[i][0] = book.getBook_id();
             // data[i][1] = book.getBook_title();
             // data[i][2] = book.getAuthor();
@@ -108,6 +159,8 @@ public class BookInfoScreen {
     }
 
     public static void main(String[] args) {
-        new BookInfoScreen();
+        int id = 3;
+        //String title = "Sherlock Holmes";
+        new BookInfoScreen(id);
     }
 }

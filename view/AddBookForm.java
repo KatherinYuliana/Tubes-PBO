@@ -131,7 +131,7 @@ public class AddBookForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser(
-                        "D:Documents/Kuliah/Semester pendek/PBO/Tubes - copy/pictures");
+                        "D:Documents/Kuliah/Semester pendek/PBO/Tubes/pictures");
                 int option = fileChooser.showOpenDialog(frame);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     selectedFile = fileChooser.getSelectedFile();
@@ -151,7 +151,8 @@ public class AddBookForm {
             public void actionPerformed(ActionEvent e) {
                 String book_title = titleField.getText();
                 String author = authorField.getText();
-                int year = Integer.parseInt(yearField.getText());
+                String year = yearField.getText();
+                //int year = Integer.parseInt(yearField.getText());
                 String genre = genreField.getText();
                 String category = novelButton.isSelected() ? "Novel" : "Comic";
                 double rating = Double.parseDouble(ratingField.getText());

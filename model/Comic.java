@@ -28,7 +28,7 @@ public class Comic extends Book {
     //     this.category_comic = category_comic;
     // }
 
-    public Comic(int book_id, String title, String author, int publication_year, String genre, String category,
+    public Comic(int book_id, String title, String author, String publication_year, String genre, String category,
             double rating, String sinopsis, String book_status, String book_cover, String ilustrator,
             CategoryComicEnum category_comic) {
         super(book_id, title, author, publication_year, genre, category, rating, sinopsis, book_status, book_cover);
