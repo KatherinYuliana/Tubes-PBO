@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.BookController;
 import model.Book;
+import model.Enum.CategoryBookEnum;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class BookInfoScreen {
     BookController con = BookController.getInstance();
+    //CategoryBookEnum category;
 
     private static ImageIcon scaleImage(String imagePath, int width, int height) {
         ImageIcon icon = new ImageIcon(imagePath);
@@ -102,7 +104,7 @@ public class BookInfoScreen {
        
         ArrayList<Book> showAllBook = con.getBookInfo(id);
 
-        Object[][] data = new Object[showAllBook.size()][4];
+        //Object[][] data = new Object[showAllBook.size()][4];
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
@@ -133,6 +135,30 @@ public class BookInfoScreen {
             genreLabel2.setBounds(265, 150, 200, 30);
             frame.add(genreLabel2);
 
+           
+            String kategori = book.getCategory();
+            // if (kategori == "Novel") {
+            //     kategori = CategoryBookEnum.NOVEL;
+            // }
+            JLabel categoryLabel2 = new JLabel(kategori);
+            categoryLabel2.setBounds(280, 170, 200, 30);
+            frame.add(categoryLabel2);
+
+            //Double rating = book.getRating();
+            String rating = String.valueOf(book.getRating());
+            JLabel ratingLabel2 = new JLabel(rating);
+            ratingLabel2.setBounds(265, 190, 200, 30);
+            frame.add(ratingLabel2);
+
+            String status = book.getBook_status();
+            JLabel statusLabel2 = new JLabel(status);
+            statusLabel2.setBounds(265, 210, 200, 30);
+            frame.add(statusLabel2);
+
+            String sinopsis = book.getSinopsis();
+            JLabel sinopsisLabel2 = new JLabel(sinopsis);
+            sinopsisLabel2.setBounds(275, 230, 200, 30);
+            frame.add(sinopsisLabel2);
             // JLabel bookCover2 = new JLabel(cover);
             // bookCover2.setBounds(50, 70, 150, 200);
             // //bookCover2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -159,7 +185,7 @@ public class BookInfoScreen {
     }
 
     public static void main(String[] args) {
-        int id = 3;
+        int id = 2;
         //String title = "Sherlock Holmes";
         new BookInfoScreen(id);
     }

@@ -252,9 +252,6 @@ public class HomeAdmin {
         scrollPane.setBounds(10, 60, 760, 200);
         frame.add(scrollPane);
 
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
         // Log Out Buton
         logoutButton.addActionListener(new ActionListener() {
             @Override
@@ -264,6 +261,9 @@ public class HomeAdmin {
                 frame.dispose();
             }
         });
+        
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {

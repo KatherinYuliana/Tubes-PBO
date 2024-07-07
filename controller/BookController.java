@@ -132,6 +132,7 @@ public class BookController {
     public ArrayList<Book> getBookInfo(int id) {
         conn.connect();
         String query = "SELECT * FROM book WHERE book_id = '" + id + "'";
+        //String query = "SELECT * FROM book WHERE book_id = '" + id + "'" + " OR book_title = '" + title + "'";
         ArrayList<Book> books = new ArrayList<>();
         try {
             Statement statement = conn.con.createStatement();
