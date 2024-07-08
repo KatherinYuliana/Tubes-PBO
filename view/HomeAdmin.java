@@ -74,9 +74,9 @@ public class HomeAdmin {
         // tableModel.addColumn("Edit Buku");
         // tableModel.addColumn("Hapus Buku");
         ArrayList<Book> showAllBook = con.getAllBookAdmin();
-        String[] columnNames = { "ID", "Judul Buku", "Author", "Category" };
+        String[] columnNames = { "ID", "Judul Buku", "Author", "Category" , "Status"};
 
-        Object[][] data = new Object[showAllBook.size()][4];
+        Object[][] data = new Object[showAllBook.size()][5];
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
@@ -84,7 +84,7 @@ public class HomeAdmin {
             data[i][1] = book.getBook_title();
             data[i][2] = book.getAuthor();
             data[i][3] = book.getCategory();
-
+            data[i][4] = book.getBook_status();
         }
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);

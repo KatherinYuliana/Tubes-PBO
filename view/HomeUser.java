@@ -91,7 +91,7 @@ public class HomeUser {
         recommendationsLabel.setBounds(50, 120, 200, 30);
         panel.add(recommendationsLabel);
 
-        JLabel image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 100, 150));
+        JLabel image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 100, 150));
         image1.setBounds(50, 160, 100, 150);
         panel.add(image1);
 
@@ -122,7 +122,7 @@ public class HomeUser {
         });
 
         //JLabel image2 = new JLabel("Sherlock Holmes");
-        JLabel image2 = new JLabel(scaleImage("pictures/Sherlock Holmes.jpg", 100, 150));
+        JLabel image2 = new JLabel(scaleImage("pictures/novel/Sherlock Holmes.jpg", 100, 150));
         image2.setBounds(200, 160, 100, 150);
         panel.add(image2);
 
@@ -161,9 +161,39 @@ public class HomeUser {
         popularLabel.setBounds(50, 330, 200, 30);
         panel.add(popularLabel);
 
-        JLabel image4 = new JLabel("gambar 4");
+        JLabel image4 = new JLabel(scaleImage("pictures/novel/Harry Potter.jpg", 100, 150));
         image4.setBounds(50, 370, 100, 150);
         panel.add(image4);
+
+        image4.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                int id = 1;
+                //String title = "";
+                new BookInfoScreen(id);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
+        // JLabel image4 = new JLabel("gambar 4");
+        // image4.setBounds(50, 370, 100, 150);
+        // panel.add(image4);
         
         JLabel image5 = new JLabel("gambar 5");
         image5.setBounds(200, 370, 100, 150);

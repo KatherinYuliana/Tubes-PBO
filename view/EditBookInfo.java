@@ -183,7 +183,7 @@ public class EditBookInfo {
             // }
             if (kategori.equals("Novel")) {
                 novelButton.setSelected(true);
-            } else if (kategori.equals("Komik")) {
+            } else if (kategori.equals("Comic")) {
                 comicButton.setSelected(true);
             }
             // JLabel categoryLabel2 = new JLabel(kategori);
@@ -237,16 +237,16 @@ public class EditBookInfo {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // String book_title = titleField.getText();
-                // String author = authorField.getText();
-                // String year = yearField.getText();
-                // //int year = Integer.parseInt(yearField.getText());
-                // String genre = genreField.getText();
-                // String category = novelButton.isSelected() ? "Novel" : "Comic";
-                // double rating = Double.parseDouble(ratingField.getText());
-                // String sinopsis = synopsisArea.getText();
-                // String book_status = (String) statusComboBox.getSelectedItem();
-                // String book_cover = filePath;
+                String book_title = titleField.getText();
+                String author = authorField.getText();
+                String year = yearField.getText();
+                //int year = Integer.parseInt(yearField.getText());
+                String genre = genreField.getText();
+                String category = novelButton.isSelected() ? "Novel" : "Comic";
+                double rating = Double.parseDouble(ratingField.getText());
+                String sinopsis = synopsisArea.getText();
+                String book_status = (String) statusComboBox.getSelectedItem();
+                String book_cover = filePath;
 
                 // Blob book_cover = selectedFile.getAbsolutePath();
                 // byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
@@ -256,19 +256,21 @@ public class EditBookInfo {
                 // Blob book_cover = connection.createBlob();
                 // book_cover.setBinaryStream(1, fileInputStream, (int) selectedFile.length());
 
-                // ArrayList<Book> listBook = con.getAllBookList();
-                // Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
-                //         book_cover, listBook.size() + 1);
-                // boolean cek = con.addNewBook(newBook);
-                // if (cek) {
-                //     JOptionPane.showMessageDialog(frame, "Buku Berhasil Ditambah", "Success",
-                //             JOptionPane.WARNING_MESSAGE);
-                //     new HomeAdmin();
-                //     frame.dispose();
-                // } else {
-                //     JOptionPane.showMessageDialog(frame, "Buku Gagal Ditambah", "Error",
-                //             JOptionPane.WARNING_MESSAGE);
-                // }
+                //ArrayList<Book> listBook = con.getAllBookList();
+                //boolean listBook = con.editBookInfo(id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
+                //Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
+                        //book_cover);
+                boolean cek = con.editBookInfo(id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
+                //boolean cek = con.addNewBook(newBook);
+                if (cek) {
+                    JOptionPane.showMessageDialog(frame, "Buku Berhasil Diedit", "Success",
+                            JOptionPane.WARNING_MESSAGE);
+                    new HomeAdmin();
+                    frame.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Buku Gagal Diedit", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -284,6 +286,8 @@ public class EditBookInfo {
                 frame.setVisible(false);
             }
         });
+        
+        //System.out.println(id);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

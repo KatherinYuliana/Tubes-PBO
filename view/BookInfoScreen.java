@@ -157,7 +157,7 @@ public class BookInfoScreen {
 
             String sinopsis = book.getSinopsis();
             JLabel sinopsisLabel2 = new JLabel(sinopsis);
-            sinopsisLabel2.setBounds(275, 230, 200, 30);
+            sinopsisLabel2.setBounds(275, 230, 500, 30);
             frame.add(sinopsisLabel2);
             // JLabel bookCover2 = new JLabel(cover);
             // bookCover2.setBounds(50, 70, 150, 200);
@@ -174,6 +174,13 @@ public class BookInfoScreen {
         JButton chapter1Button = new JButton("Chapter 1");
         chapter1Button.setBounds(50, 320, 700, 40);
         frame.add(chapter1Button);
+
+        chapter1Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ChapterScreen();
+            }
+        });
 
         // Chapter 2 button
         JButton chapter2Button = new JButton("Chapter 2");

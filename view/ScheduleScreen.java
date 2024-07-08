@@ -106,7 +106,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -149,7 +149,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/Jujutsu Kaisen.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Jujutsu Kaisen.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -191,7 +191,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Black Butler.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -199,7 +199,7 @@ public class ScheduleScreen {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         frame.dispose();
-                        int id = 4;
+                        int id = 5;
                         // String title = "One Piece";
                         new BookInfoScreen(id);
                     }
@@ -234,7 +234,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -277,7 +277,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -320,7 +320,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -363,7 +363,7 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
