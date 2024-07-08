@@ -192,7 +192,8 @@ public class AddBookForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new HomeAdmin();
-                frame.setVisible(false);
+                frame.dispose();
+                //frame.setVisible(false);
             }
         });
 
@@ -201,6 +202,7 @@ public class AddBookForm {
     }
 
     public static void main(String[] args) {
+        
         new AddBookForm();
     }
 }

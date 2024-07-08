@@ -20,17 +20,20 @@ import java.util.HashMap;
 public class HomeAdmin {
     // private Connection connection;
     private JFrame frame;
+    private JLabel editLabel;
     private JTable table;
     private DefaultTableModel tableModel;
     BookController con = BookController.getInstance();
     private Connection connection;
-    private JTextField titleField, authorField, yearField, genreField, ratingField;
+    private JTextField titleField, authorField, yearField, genreField, ratingField, editField;
     private JTextArea synopsisArea;
     private JRadioButton novelButton, comicButton;
     private JComboBox<String> statusComboBox;
     private JLabel coverLabel, fileNameLabel;
+    private JButton cariButton, hapusButton;
     private File selectedFile;
     private String filePath;
+    Book book = new Book();
 
     private JLabel[] imageLabels;
 
@@ -87,6 +90,9 @@ public class HomeAdmin {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
         JTable userTable = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(userTable);
+        scrollPane.setBounds(10, 60, 760, 200);
+        frame.add(scrollPane);
 
         // Add book button
         JButton addButton = new JButton("Tambah Buku");
@@ -98,10 +104,11 @@ public class HomeAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddBookForm();
+                frame.dispose();
             }
         });
 
-        // Add book button
+        // Edit book button
         JButton editButton = new JButton("Edit Buku");
         editButton.setBounds(150, 280, 120, 30);
         frame.add(editButton);
@@ -110,153 +117,140 @@ public class HomeAdmin {
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (editLabel != null) {
+                    frame.remove(editLabel);
+                }
+                if (editField != null) {
+                    frame.remove(editField);
+                }
+                if (cariButton != null) {
+                    frame.remove(cariButton);
+                }
 
-                JLabel editLabel = new JLabel("Masukkan id buku yang mau di edit:");
+                editLabel = new JLabel("Masukkan id buku yang mau di edit:");
                 editLabel.setBounds(10, 330, 250, 25);
                 frame.add(editLabel);
 
-                JTextField editField = new JTextField(15);
+                editField = new JTextField(15);
                 editField.setBounds(10, 360, 165, 25);
                 frame.add(editField);
 
-                JButton cariButton = new JButton("Cari");
+                cariButton = new JButton("Cari");
                 cariButton.setBounds(10, 390, 70, 20);
                 frame.add(cariButton);
                 frame.revalidate();
                 frame.repaint();
 
-                editButton.addActionListener(new ActionListener() {
+                cariButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        frame = new JFrame("Edit Book");
-                        frame.setSize(800, 600);
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame.setLayout(null);
+                        frame.dispose();
+                        int id = Integer.parseInt(editField.getText());
+                        //int a = book.getBook_id();
+                        //if (id == book.getBook_id()) {
+                        new EditBookInfo(id);
+                        // } else {
+                        //     JOptionPane.showMessageDialog(frame, "ID tidak ada dalam daftar", "Error",JOptionPane.WARNING_MESSAGE);
+                        //     new HomeAdmin();
 
-                        // Tambah Buku
-                        JLabel menuLabel = new JLabel("Edit Buku");
-                        menuLabel.setBounds(10, 10, 200, 30);
-                        menuLabel.setFont(new Font("Serif", Font.BOLD, 20));
-                        frame.add(menuLabel);
-
-                        // Judul Buku
-                        JLabel titleLabel = new JLabel("Judul Buku:");
-                        titleLabel.setBounds(10, 50, 150, 25);
-                        frame.add(titleLabel);
-                        titleField = new JTextField();
-                        titleField.setBounds(170, 50, 300, 25);
-                        frame.add(titleField);
-
-                        // Author
-                        JLabel authorLabel = new JLabel("Author:");
-                        authorLabel.setBounds(10, 90, 150, 25);
-                        frame.add(authorLabel);
-                        authorField = new JTextField();
-                        authorField.setBounds(170, 90, 300, 25);
-                        frame.add(authorField);
-
-                        // Tahun Terbit
-                        JLabel yearLabel = new JLabel("Tahun Terbit:");
-                        yearLabel.setBounds(10, 130, 150, 25);
-                        frame.add(yearLabel);
-                        yearField = new JTextField();
-                        yearField.setBounds(170, 130, 300, 25);
-                        frame.add(yearField);
-
-                        // Genre
-                        JLabel genreLabel = new JLabel("Genre:");
-                        genreLabel.setBounds(10, 170, 150, 25);
-                        frame.add(genreLabel);
-                        genreField = new JTextField();
-                        genreField.setBounds(170, 170, 300, 25);
-                        frame.add(genreField);
-
-                        // Kategori
-                        JLabel categoryLabel = new JLabel("Kategori:");
-                        categoryLabel.setBounds(10, 210, 150, 25);
-                        frame.add(categoryLabel);
-                        novelButton = new JRadioButton("Novel");
-                        novelButton.setBounds(170, 210, 100, 25);
-                        frame.add(novelButton);
-                        comicButton = new JRadioButton("Komik");
-                        comicButton.setBounds(280, 210, 150, 25);
-                        frame.add(comicButton);
-
-                        ButtonGroup categoryGroup = new ButtonGroup();
-                        categoryGroup.add(novelButton);
-                        categoryGroup.add(comicButton);
-
-                        // Rating
-                        JLabel ratingLabel = new JLabel("Rating:");
-                        ratingLabel.setBounds(10, 250, 150, 25);
-                        frame.add(ratingLabel);
-                        ratingField = new JTextField();
-                        ratingField.setBounds(170, 250, 300, 25);
-                        frame.add(ratingField);
-
-                        // Sinopsis
-                        JLabel synopsisLabel = new JLabel("Sinopsis:");
-                        synopsisLabel.setBounds(10, 290, 150, 25);
-                        frame.add(synopsisLabel);
-                        synopsisArea = new JTextArea();
-                        synopsisArea.setBounds(170, 290, 300, 100);
-                        frame.add(synopsisArea);
-
-                        // Status
-                        JLabel statusLabel = new JLabel("Status Buku:");
-                        statusLabel.setBounds(10, 430, 150, 25);
-                        frame.add(statusLabel);
-                        String[] statuses = { "Ongoing", "Completed", "Hiatus" };
-                        statusComboBox = new JComboBox<>(statuses);
-                        statusComboBox.setBounds(170, 430, 300, 25);
-                        frame.add(statusComboBox);
-
-                        // Cover Buku
-                        JLabel coverLabel = new JLabel("Cover Buku:");
-                        coverLabel.setBounds(10, 470, 150, 25);
-                        frame.add(coverLabel);
-                        JButton chooseFileButton = new JButton("Pilih File");
-                        chooseFileButton.setBounds(170, 470, 150, 25);
-                        frame.add(chooseFileButton);
-                        fileNameLabel = new JLabel("");
-                        fileNameLabel.setBounds(330, 470, 240, 25);
-                        frame.add(fileNameLabel);
-
-                        chooseFileButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                JFileChooser fileChooser = new JFileChooser(
-                                        "D:Documents/Kuliah/Semester pendek/PBO/Tubes - copy/pictures");
-                                int option = fileChooser.showOpenDialog(frame);
-                                if (option == JFileChooser.APPROVE_OPTION) {
-                                    selectedFile = fileChooser.getSelectedFile();
-                                    fileNameLabel.setText(selectedFile.getName());
-                                    filePath = selectedFile.getAbsolutePath();
-                                }
-                            }
-                        });
-
-                        // Submit
-                        JButton submitButton = new JButton("Edit");
-                        submitButton.setBounds(170, 510, 150, 25);
-                        frame.add(submitButton);
-                        // Logic for logging out
-                        // new MenuUtama();
-                        // frame.dispose();
+                        //     //new EditBookInfo(id);
+                        // }
+                        
                     }
                 });
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane(userTable);
-        scrollPane.setBounds(10, 60, 760, 200);
-        frame.add(scrollPane);
+        JButton addChapterButton = new JButton("Tambah Chapter");
+        addChapterButton.setBounds(290, 280, 140, 30);
+        frame.add(addChapterButton);
+
+        // Add action listeners
+        addChapterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (editLabel != null) {
+                    frame.remove(editLabel);
+                }
+                if (editField != null) {
+                    frame.remove(editField);
+                }
+                if (cariButton != null) {
+                    frame.remove(cariButton);
+                }
+
+                editLabel = new JLabel("Masukkan id buku:");
+                editLabel.setBounds(10, 330, 250, 25);
+                frame.add(editLabel);
+
+                editField = new JTextField(15);
+                editField.setBounds(10, 360, 165, 25);
+                frame.add(editField);
+
+                cariButton = new JButton("Cari");
+                cariButton.setBounds(10, 390, 70, 20);
+                frame.add(cariButton);
+                frame.revalidate();
+                frame.repaint();
+
+                cariButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.dispose();
+                        int id = Integer.parseInt(editField.getText());
+                        new EditBook(id);
+                    }
+                });
+            }
+        });
+
+        JButton deleteButton = new JButton("Hapus Buku");
+        deleteButton.setBounds(450, 280, 120, 30);
+        frame.add(deleteButton);
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (editLabel != null) {
+                    frame.remove(editLabel);
+                }
+                if (editField != null) {
+                    frame.remove(editField);
+                }
+                if (hapusButton != null) {
+                    frame.remove(hapusButton);
+                }
+
+                editLabel = new JLabel("Masukkan id buku yang mau di hapus:");
+                editLabel.setBounds(10, 330, 250, 25);
+                frame.add(editLabel);
+
+                editField = new JTextField(15);
+                editField.setBounds(10, 360, 165, 25);
+                frame.add(editField);
+
+                hapusButton = new JButton("Hapus");
+                hapusButton.setBounds(10, 390, 70, 20);
+                frame.add(hapusButton);
+                frame.revalidate();
+                frame.repaint();
+
+                hapusButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int id = Integer.parseInt(editField.getText());
+                        JOptionPane.showConfirmDialog(null, "Apakah mau menghapus buku dengan id: " + id + " ?");
+                        //JOptionPane.showMessageDialog(null, "Selamat Datang Admin");
+                        
+                    }
+                });
+            }
+        });
 
         // Log Out Buton
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Logic for logging out
                 new MenuAwal();
                 frame.dispose();
             }

@@ -132,8 +132,6 @@ public class ScheduleScreen {
                     }
                 });
 
-                
-
                 frame.revalidate();
                 frame.repaint();
             }
@@ -176,9 +174,6 @@ public class ScheduleScreen {
                     public void mouseExited(MouseEvent e) {
                     }
                 });
-
-                
-                
                 frame.revalidate();
                 frame.repaint();
             }
@@ -192,8 +187,11 @@ public class ScheduleScreen {
         rabuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (image1 != null) {
+                    frame.remove(image1);
+                }
 
-                JLabel image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
@@ -232,8 +230,140 @@ public class ScheduleScreen {
         kamisButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (image1 != null) {
+                    frame.remove(image1);
+                }
 
-                JLabel image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1.setBounds(10, 150, 130, 200);
+                frame.add(image1);
+
+                image1.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        frame.dispose();
+                        int id = 4;
+                        // String title = "One Piece";
+                        new BookInfoScreen(id);
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                    }
+                });
+
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        // Jumat
+        JButton jumatButton = new JButton("Jumat");
+        jumatButton.setBounds(450, 100, 100, 30);
+        frame.add(jumatButton);
+
+        jumatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (image1 != null) {
+                    frame.remove(image1);
+                }
+
+                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1.setBounds(10, 150, 130, 200);
+                frame.add(image1);
+
+                image1.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        frame.dispose();
+                        int id = 4;
+                        // String title = "One Piece";
+                        new BookInfoScreen(id);
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                    }
+                });
+
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        // Sabtu
+        JButton sabtuButton = new JButton("Sabtu");
+        sabtuButton.setBounds(560, 100, 100, 30);
+        frame.add(sabtuButton);
+
+        sabtuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (image1 != null) {
+                    frame.remove(image1);
+                }
+
+                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
+                image1.setBounds(10, 150, 130, 200);
+                frame.add(image1);
+
+                image1.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        frame.dispose();
+                        int id = 4;
+                        // String title = "One Piece";
+                        new BookInfoScreen(id);
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                    }
+                });
+
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        // Minggu
+        JButton mingguButton = new JButton("Minggu");
+        mingguButton.setBounds(670, 100, 100, 30);
+        frame.add(mingguButton);
+
+        mingguButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (image1 != null) {
+                    frame.remove(image1);
+                }
+
+                image1 = new JLabel(scaleImage("pictures/One Piece.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 

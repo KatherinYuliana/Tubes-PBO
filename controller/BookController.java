@@ -116,7 +116,7 @@ public class BookController {
             while (resultSet.next()) {
                 Book book = new Book();
                 book.setBook_id(resultSet.getInt("book_id"));
-                //book.setBook_cover(resultSet.getBlob("book_cover"));
+                // book.setBook_cover(resultSet.getString("book_cover"));
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
                 book.setCategory(resultSet.getString("category"));

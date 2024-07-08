@@ -57,6 +57,19 @@ public class FavoriteScreen {
             }
         });
 
+        // Log out button
+        JButton logoutButton = new JButton("Log out");
+        logoutButton.setBounds(700, 10, 80, 30);
+        panel.add(logoutButton);
+        
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuAwal();
+                frame.setVisible(false);
+            }
+        });
+
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
