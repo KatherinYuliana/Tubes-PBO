@@ -242,7 +242,7 @@ public class HomeAdmin {
                     public void actionPerformed(ActionEvent e) {
                         int id = Integer.parseInt(hapusField.getText());
                         JOptionPane.showConfirmDialog(null, "Apakah mau menghapus buku dengan id: " + id + " ?");
-                        //JOptionPane.showMessageDialog(null, "Selamat Datang Admin");
+                        //JOptionPane.showMessageDialog(null, "Buku berhasil dihapus");
                         
                     }
                 });

@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import model.Book;
+import model.Comment;
+import model.Person;
 import model.User;
 import model.Enum.BookStatusEnum;
 import model.Enum.CategoryBookEnum;
@@ -135,9 +137,9 @@ public class BookController {
         return books;
     }
 
-    public ArrayList<Book> getBookInfo(int id) {
+    public ArrayList<Book> getBookInfo(int book_id) {
         conn.connect();
-        String query = "SELECT * FROM book WHERE book_id = '" + id + "'";
+        String query = "SELECT * FROM book WHERE book_id = '" + book_id + "'";
         // String query = "SELECT * FROM book WHERE book_id = '" + id + "'" + " OR
         // book_title = '" + title + "'";
         ArrayList<Book> books = new ArrayList<>();
@@ -194,46 +196,6 @@ public class BookController {
             return false;
         }
     }
-    // Menampilkan semua list buku pada menu admin
-    // public boolean getAllBookAdmin(Book book) {
-    // conn.connect();
-    // String query = "SELECT book_cover, book_title FROM book";
-    // try {
-    // PreparedStatement statement = conn.con.prepareStatement(query);
-    // statement.setInt(1, book.getBook_id());
-    // statement.setString(2, book.getBook_title());
-    // statement.setBlob(10, book.getBook_cover());
-    // //statement.setString(3, book.getAuthor());
-    // //statement.setDate(4, (Date) book.getPublication_year());
-    // //statement.setGenre(5, book.getGenre());
-    // //statement.setCategory(6, book.getCategory());
-    // //statement.setDouble(7, book.getRating());
-    // //statement.setString(8, book.getSinopsis());
-    // //statement.setBookStatus(9, book.getBook_status());
-    // //statement.setString(10, book.getTitle());
-    // // statement.setInt(1, user.getId());
-    // // statement.setString(2, user.getUsername());
-    // // statement.setString(3, user.getEmail());
-    // // statement.setString(4, user.getPassword());
-    // // //String statusString = user.getStatus().toString();
-    // // statement.setString(5, user.getStatus());
-
-    // // Execute the SQL statement
-    // int rowsAffected = statement.executeUpdate();
-
-    // // Check if the insertion was successful
-    // if (rowsAffected > 0) {
-    // return true;
-    // } else {
-    // return false;
-    // }
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // return false;
-    // } finally {
-    // conn.disconnect();
-    // }
-    // }
 
     public boolean deleteBook(int book_id) {
         try {
@@ -260,4 +222,62 @@ public class BookController {
             conn.disconnect();
         }
     }
+
+    public ArrayList<Book> getFavoriteList(int id) {
+        conn.connect();
+        String query = "SELECT b.book_cover, b.book_title FROM favorite f JOIN book b ON f.book_id = b.book_id WHERE f.id = " + id;
+        ArrayList<Book> books = new ArrayList<>();
+        // PreparedStatement statement = connection.prepareStatement(query);
+        // statement.setInt(1, userId);
+        try {
+            Statement statement = conn.con.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                Book book = new Book();
+                //book.setBook_id(resultSet.getInt("book_id"));
+                book.setBook_cover(resultSet.getString("book_cover"));
+                book.setBook_title(resultSet.getString("book_title"));
+                // book.setAuthor(resultSet.getString("author"));
+                // book.setCategory(resultSet.getString("category"));
+                // book.setBook_status(resultSet.getString("book_status"));
+
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
+    // public ArrayList<Person> getComment(int chapter_id) {
+    //     conn.connect();
+    //     //String query = "SELECT person.username, comment.comment_content FROM person JOIN comment ON person.id = comment.id";
+    //     String query = "SELECT person.username, comment.comment_content FROM person JOIN comment ON person.id = comment.id WHERE comment.chapter_id = " + chapter_id;
+    //     ArrayList<Person> coment = new ArrayList<>();
+    //     // PreparedStatement statement = connection.prepareStatement(query);
+    //     // statement.setInt(1, userId);
+    //     try {
+    //         Statement statement = conn.con.createStatement();
+    //         ResultSet resultSet = statement.executeQuery(query);
+    //         while (resultSet.next()) {
+    //             Person person = new Person();
+    //             Comment comment = new Comment();
+    //             person.setUsername(resultSet.getString("username"));
+    //             comment.setComment_content(resultSet.getString("comment_content"));
+    //             //Book book = new Book();
+    //             //book.setBook_id(resultSet.getInt("book_id"));
+    //             // book.setBook_cover(resultSet.getString("book_cover"));
+    //             // book.setBook_title(resultSet.getString("book_title"));
+    //             // book.setAuthor(resultSet.getString("author"));
+    //             // book.setCategory(resultSet.getString("category"));
+    //             // book.setBook_status(resultSet.getString("book_status"));
+
+    //             coment.add(person);
+    //             coment.add(comment);
+    //         }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    //     return books;
+    // }
 }

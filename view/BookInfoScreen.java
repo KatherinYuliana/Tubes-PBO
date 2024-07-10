@@ -22,7 +22,7 @@ public class BookInfoScreen {
         return new ImageIcon(scaledImg);
     }
 
-    public BookInfoScreen(int id) {
+    public BookInfoScreen(int book_id, int id) {
         JFrame frame = new JFrame("Book Info");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +36,7 @@ public class BookInfoScreen {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeUser();
+                new HomeUser(id);
                 frame.dispose();
                 //frame.setVisible(false);
             }
@@ -102,7 +102,7 @@ public class BookInfoScreen {
         });
 
        
-        ArrayList<Book> showAllBook = con.getBookInfo(id);
+        ArrayList<Book> showAllBook = con.getBookInfo(book_id);
 
         //Object[][] data = new Object[showAllBook.size()][4];
 
@@ -178,7 +178,7 @@ public class BookInfoScreen {
         chapter1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ChapterScreen();
+                new ChapterScreen(book_id, id);
                 frame.dispose();
             }
         });
@@ -193,8 +193,9 @@ public class BookInfoScreen {
     }
 
     public static void main(String[] args) {
+        int book_id = 2;
         int id = 2;
         //String title = "Sherlock Holmes";
-        new BookInfoScreen(id);
+        new BookInfoScreen(book_id, id);
     }
 }

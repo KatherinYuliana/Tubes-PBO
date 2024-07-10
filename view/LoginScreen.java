@@ -78,10 +78,11 @@ public class LoginScreen {
                     //     JOptionPane.showMessageDialog(null, "This account is banned");
                     //     return;
                     // }
-                    
+                    //System.out.println(loggedInUser.getId());
                     frame.dispose();
                     JOptionPane.showMessageDialog(null, "Selamat Datang " + username);
-                    new HomeUser();
+                    int id = loggedInUser.getId();
+                    new HomeUser(id);
                     //new HomeUser((User) loggedInUser);
                 } else if (loggedInUser instanceof Admin) {
                     frame.dispose();

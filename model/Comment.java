@@ -4,6 +4,9 @@ public class Comment {
     private int comment_id;
     private String comment_content;
 
+    public Comment() {
+    }
+
     public Comment(int comment_id, String comment_content) {
         this.comment_id = comment_id;
         this.comment_content = comment_content;

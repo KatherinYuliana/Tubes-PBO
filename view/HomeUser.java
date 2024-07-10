@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.Book;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
@@ -21,7 +24,7 @@ public class HomeUser {
         return new ImageIcon(scaledImg);
     }
 
-    public HomeUser() {
+    public HomeUser(int id) {
         JFrame frame = new JFrame("Main Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -39,7 +42,7 @@ public class HomeUser {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeUser();
+                new HomeUser(id);
                 frame.setVisible(false);
             }
         });
@@ -52,7 +55,8 @@ public class HomeUser {
         jadwalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ScheduleScreen();
+                int book_id = 2;
+                new ScheduleScreen(book_id, id);
                 frame.setVisible(false);
             }
         });
@@ -65,7 +69,8 @@ public class HomeUser {
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FavoriteScreen();
+
+                new FavoriteScreen(id);
                 frame.setVisible(false);
             }
         });
@@ -98,10 +103,15 @@ public class HomeUser {
         image1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                Book book = new Book();
+
                 frame.dispose();
-                int id = 4;
+                int no = 4;
+                int book_id = book.getBook_id();
+                book_id = no;
+                //System.out.println(book_id);
                 //String title = "One Piece";
-                new BookInfoScreen(id);
+                new BookInfoScreen(book_id, id);
             }
 
             @Override
@@ -129,10 +139,20 @@ public class HomeUser {
         image2.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // frame.dispose();
+                // int book_id = 3;
+                // //String title = "";
+                // new BookInfoScreen(book_id, id);
+
+                Book book = new Book();
+
                 frame.dispose();
-                int id = 3;
-                //String title = "";
-                new BookInfoScreen(id);
+                int no = 3;
+                int book_id = book.getBook_id();
+                book_id = no;
+                //System.out.println(book_id);
+                //String title = "One Piece";
+                new BookInfoScreen(book_id, id);
             }
 
             @Override
@@ -168,10 +188,20 @@ public class HomeUser {
         image4.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // frame.dispose();
+                // int book_id = 1;
+                // //String title = "";
+                // new BookInfoScreen(book_id, id);
+
+                Book book = new Book();
+
                 frame.dispose();
-                int id = 1;
-                //String title = "";
-                new BookInfoScreen(id);
+                int no = 1;
+                int book_id = book.getBook_id();
+                book_id = no;
+                //System.out.println(book_id);
+                //String title = "One Piece";
+                new BookInfoScreen(book_id, id);
             }
 
             @Override
@@ -218,6 +248,7 @@ public class HomeUser {
     }
     
     public static void main(String[] args) {
-        new HomeUser();
+        int id = 2;
+        new HomeUser(id);
     }
 }

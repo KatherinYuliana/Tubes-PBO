@@ -294,7 +294,7 @@ public class EditBookInfo {
     }
 
     public static void main(String[] args) {
-        int id = 1;
+        int id = 2;
         new EditBookInfo(id);
     }
 }

@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Book;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -29,7 +31,7 @@ public class ScheduleScreen {
         return new ImageIcon(scaledImg);
     }
 
-    public ScheduleScreen() {
+    public ScheduleScreen(int book_id, int id) {
         frame = new JFrame("Jadwal");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +49,7 @@ public class ScheduleScreen {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeUser();
+                new HomeUser(id);
                 frame.setVisible(false);
             }
         });
@@ -60,7 +62,7 @@ public class ScheduleScreen {
         jadwalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ScheduleScreen();
+                new ScheduleScreen(book_id, id);
                 frame.setVisible(false);
             }
         });
@@ -73,7 +75,7 @@ public class ScheduleScreen {
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FavoriteScreen();
+                new FavoriteScreen(id);
                 frame.setVisible(false);
             }
         });
@@ -113,10 +115,20 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        // frame.dispose();
+                        // int book_id = 4;
+                        // // String title = "One Piece";
+                        // new BookInfoScreen(book_id, id);
+
+                        Book book = new Book();
+
                         frame.dispose();
-                        int id = 4;
-                        // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        int no = 4;
+                        int book_id = book.getBook_id();
+                        book_id = no;
+                        //System.out.println(book_id);
+                        //String title = "One Piece";
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -156,10 +168,20 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        // frame.dispose();
+                        // int book_id = 2;
+                        // // String title = "One Piece";
+                        // new BookInfoScreen(book_id, id);
+
+                        Book book = new Book();
+
                         frame.dispose();
-                        int id = 2;
-                        // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        int no = 2;
+                        int book_id = book.getBook_id();
+                        book_id = no;
+                        //System.out.println(book_id);
+                        //String title = "One Piece";
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -198,10 +220,20 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        // frame.dispose();
+                        // int book_id = 5;
+                        // // String title = "One Piece";
+                        // new BookInfoScreen(book_id, id);
+
+                        Book book = new Book();
+
                         frame.dispose();
-                        int id = 5;
-                        // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        int no = 5;
+                        int book_id = book.getBook_id();
+                        book_id = no;
+                        //System.out.println(book_id);
+                        //String title = "One Piece";
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -242,9 +274,9 @@ public class ScheduleScreen {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         frame.dispose();
-                        int id = 4;
+                        int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -285,9 +317,9 @@ public class ScheduleScreen {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         frame.dispose();
-                        int id = 4;
+                        int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -328,9 +360,9 @@ public class ScheduleScreen {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         frame.dispose();
-                        int id = 4;
+                        int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -371,9 +403,9 @@ public class ScheduleScreen {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         frame.dispose();
-                        int id = 4;
+                        int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(id);
+                        new BookInfoScreen(book_id, id);
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -477,6 +509,8 @@ public class ScheduleScreen {
     // }
 
     public static void main(String[] args) {
-        new ScheduleScreen();
+        int book_id = 2;
+        int id = 2;
+        new ScheduleScreen(book_id, id);
     }
 }
