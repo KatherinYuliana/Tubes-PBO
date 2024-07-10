@@ -29,7 +29,7 @@ public class ChapterScreen {
 
         // Back button
         JButton backButton = new JButton("Back");
-        backButton.setBounds(10, 10, 80, 30);
+        backButton.setBounds(10, 10, 80, 25);
         frame.add(backButton);
 
         backButton.addActionListener(new ActionListener() {
@@ -37,8 +37,14 @@ public class ChapterScreen {
             public void actionPerformed(ActionEvent e) {
                 int id = 4;
                 new BookInfoScreen(id);
+                frame.dispose();
             }
         });
+
+        JLabel chapter_titleLabel = new JLabel("Chapter 1");
+        chapter_titleLabel.setBounds(100, 8, 200, 30);
+        chapter_titleLabel.setFont(new Font("Serif", Font.BOLD, 25));
+        frame.add(chapter_titleLabel);
 
         // Panel in the center
         // Color color = new Color(255, 255, 255);
@@ -71,7 +77,7 @@ public class ChapterScreen {
         lihatKomentarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                new CommentsSectionGUI();
             }
         });
 

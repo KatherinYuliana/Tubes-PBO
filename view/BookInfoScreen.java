@@ -179,6 +179,7 @@ public class BookInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ChapterScreen();
+                frame.dispose();
             }
         });
 

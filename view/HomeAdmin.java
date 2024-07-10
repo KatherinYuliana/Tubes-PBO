@@ -20,17 +20,17 @@ import java.util.HashMap;
 public class HomeAdmin {
     // private Connection connection;
     private JFrame frame;
-    private JLabel editLabel;
+    private JLabel editLabel, tambahLabel, hapusLabel;
     private JTable table;
     private DefaultTableModel tableModel;
     BookController con = BookController.getInstance();
     private Connection connection;
-    private JTextField titleField, authorField, yearField, genreField, ratingField, editField;
+    private JTextField titleField, authorField, yearField, genreField, ratingField, editField, tambahField, hapusField;
     private JTextArea synopsisArea;
     private JRadioButton novelButton, comicButton;
     private JComboBox<String> statusComboBox;
     private JLabel coverLabel, fileNameLabel;
-    private JButton cariButton, hapusButton;
+    private JButton editButton2, tambahButton, hapusButton;
     private File selectedFile;
     private String filePath;
     Book book = new Book();
@@ -113,35 +113,35 @@ public class HomeAdmin {
         editButton.setBounds(150, 280, 120, 30);
         frame.add(editButton);
 
-        // Add action listeners
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (editLabel != null) {
-                    frame.remove(editLabel);
-                }
-                if (editField != null) {
-                    frame.remove(editField);
-                }
-                if (cariButton != null) {
-                    frame.remove(cariButton);
-                }
-
+                // if (editLabel != null) {
+                //     frame.remove(editLabel);
+                // }
+                removeOldComponents();
+                
                 editLabel = new JLabel("Masukkan id buku yang mau di edit:");
                 editLabel.setBounds(10, 330, 250, 25);
                 frame.add(editLabel);
-
+                
+                // if (editField != null) {
+                //     frame.remove(editField);
+                // }
                 editField = new JTextField(15);
                 editField.setBounds(10, 360, 165, 25);
                 frame.add(editField);
-
-                cariButton = new JButton("Cari");
-                cariButton.setBounds(10, 390, 70, 20);
-                frame.add(cariButton);
+                
+                // if (editButton2 != null) {
+                //     frame.remove(editButton2);
+                // }
+                editButton2 = new JButton("Cari");
+                editButton2.setBounds(10, 390, 70, 20);
+                frame.add(editButton2);
                 frame.revalidate();
                 frame.repaint();
 
-                cariButton.addActionListener(new ActionListener() {
+                editButton2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         frame.dispose();
@@ -169,31 +169,32 @@ public class HomeAdmin {
         addChapterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (editLabel != null) {
-                    frame.remove(editLabel);
-                }
-                if (editField != null) {
-                    frame.remove(editField);
-                }
-                if (cariButton != null) {
-                    frame.remove(cariButton);
-                }
-
-                editLabel = new JLabel("Masukkan id buku:");
-                editLabel.setBounds(10, 330, 250, 25);
-                frame.add(editLabel);
-
-                editField = new JTextField(15);
-                editField.setBounds(10, 360, 165, 25);
-                frame.add(editField);
-
-                cariButton = new JButton("Cari");
-                cariButton.setBounds(10, 390, 70, 20);
-                frame.add(cariButton);
+                // if (tambahLabel != null) {
+                //     frame.remove(tambahLabel);
+                // }
+                removeOldComponents();
+                
+                tambahLabel = new JLabel("Masukkan id buku:");
+                tambahLabel.setBounds(10, 330, 250, 25);
+                frame.add(tambahLabel);
+                
+                // if (tambahField != null) {
+                //     frame.remove(tambahField);
+                // }
+                tambahField = new JTextField(15);
+                tambahField.setBounds(10, 360, 165, 25);
+                frame.add(tambahField);
+                
+                // if (tambahButton != null) {
+                //     frame.remove(tambahButton);
+                // }
+                tambahButton = new JButton("Cari");
+                tambahButton.setBounds(10, 390, 70, 20);
+                frame.add(tambahButton);
                 frame.revalidate();
                 frame.repaint();
 
-                cariButton.addActionListener(new ActionListener() {
+                tambahButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         frame.dispose();
@@ -211,24 +212,25 @@ public class HomeAdmin {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (editLabel != null) {
-                    frame.remove(editLabel);
-                }
-                if (editField != null) {
-                    frame.remove(editField);
-                }
-                if (hapusButton != null) {
-                    frame.remove(hapusButton);
-                }
-
-                editLabel = new JLabel("Masukkan id buku yang mau di hapus:");
-                editLabel.setBounds(10, 330, 250, 25);
-                frame.add(editLabel);
-
-                editField = new JTextField(15);
-                editField.setBounds(10, 360, 165, 25);
-                frame.add(editField);
-
+                removeOldComponents();
+                // if (hapusLabel != null) {
+                //     frame.remove(hapusLabel);
+                // }
+                
+                hapusLabel = new JLabel("Masukkan id buku yang mau di hapus:");
+                hapusLabel.setBounds(10, 330, 250, 25);
+                frame.add(hapusLabel);
+                
+                // if (hapusField != null) {
+                //     frame.remove(hapusField);
+                // }
+                hapusField = new JTextField(15);
+                hapusField.setBounds(10, 360, 165, 25);
+                frame.add(hapusField);
+                
+                // if (hapusButton != null) {
+                //     frame.remove(hapusButton);
+                // }
                 hapusButton = new JButton("Hapus");
                 hapusButton.setBounds(10, 390, 70, 20);
                 frame.add(hapusButton);
@@ -238,7 +240,7 @@ public class HomeAdmin {
                 hapusButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int id = Integer.parseInt(editField.getText());
+                        int id = Integer.parseInt(hapusField.getText());
                         JOptionPane.showConfirmDialog(null, "Apakah mau menghapus buku dengan id: " + id + " ?");
                         //JOptionPane.showMessageDialog(null, "Selamat Datang Admin");
                         
@@ -258,6 +260,20 @@ public class HomeAdmin {
         
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void removeOldComponents() {
+        if (editLabel != null) frame.remove(editLabel);
+        if (editField != null) frame.remove(editField);
+        if (editButton2 != null) frame.remove(editButton2);
+
+        if (tambahLabel != null) frame.remove(tambahLabel);
+        if (tambahField != null) frame.remove(tambahField);
+        if (tambahButton != null) frame.remove(tambahButton);
+
+        if (hapusLabel != null) frame.remove(hapusLabel);
+        if (hapusField != null) frame.remove(hapusField);
+        if (hapusButton != null) frame.remove(hapusButton);
     }
 
     public static void main(String[] args) {
