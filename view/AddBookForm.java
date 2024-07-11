@@ -152,20 +152,12 @@ public class AddBookForm {
                 String book_title = titleField.getText();
                 String author = authorField.getText();
                 String year = yearField.getText();
-                //int year = Integer.parseInt(yearField.getText());
                 String genre = genreField.getText();
                 String category = novelButton.isSelected() ? "Novel" : "Comic";
                 double rating = Double.parseDouble(ratingField.getText());
                 String sinopsis = synopsisArea.getText();
                 String book_status = (String) statusComboBox.getSelectedItem();
                 String book_cover = filePath;
-                // Blob book_cover = selectedFile.getAbsolutePath();
-                // byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
-                // Blob book_cover = new SerialBlob(fileContent);
-                // File selectedFile = new File("path/to/your/book_cover.jpg");
-                // FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                // Blob book_cover = connection.createBlob();
-                // book_cover.setBinaryStream(1, fileInputStream, (int) selectedFile.length());
 
                 ArrayList<Book> listBook = con.getAllBookList();
                 Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,

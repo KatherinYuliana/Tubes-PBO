@@ -38,9 +38,6 @@ public class BookController {
     public boolean addNewBook(Book book) {
         conn.connect();
         String query = "INSERT INTO book VALUES(?,?,?,?,?,?,?,?,?,?)";
-        // String query = "INSERT INTO book (book_id, book_title, author,
-        // publication_year, genre, category, rating, sinopsis, book_status, book_cover)
-        // VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement statement = conn.con.prepareStatement(query);
@@ -48,18 +45,10 @@ public class BookController {
             statement.setString(2, book.getBook_title());
             statement.setString(3, book.getAuthor());
             statement.setString(4, book.getPublication_year());
-            // statement.setInt(4, book.getPublication_year());
-            // statement.setDate(4, new
-            // java.sql.Date(book.getPublication_year().getTime())); // Convert
-            // java.util.Date to java.sql.Date
-            // statement.setString(5, book.getGenre().name()); // Convert enum to string
             statement.setString(5, book.getGenre());
-            // statement.setString(6, book.getCategory().name()); // Convert enum to string
             statement.setString(6, book.getCategory());
             statement.setDouble(7, book.getRating());
             statement.setString(8, book.getSinopsis());
-            // statement.setString(9, book.getBook_status().name()); // Convert enum to
-            // string
             statement.setString(9, book.getBook_status());
             statement.setString(10, book.getBook_cover());
 
@@ -93,15 +82,10 @@ public class BookController {
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
                 book.setPublication_year(resultSet.getString("publication_year"));
-                // book.setPublication_year(resultSet.getInt("publication_year"));
-                // book.setPublication_year(resultSet.getDate("publication_year"));
-                // book.setGenre(GenreEnum.valueOf(resultSet.getString("genre")));
                 book.setGenre(resultSet.getString("genre"));
-                // book.setCategory(CategoryBookEnum.valueOf(resultSet.getString("category")));
                 book.setCategory(resultSet.getString("category"));
                 book.setRating(resultSet.getDouble("rating"));
                 book.setSinopsis(resultSet.getString("sinopsis"));
-                // book.setBook_status(BookStatusEnum.valueOf(resultSet.getString("book_status")));
                 book.setBook_status(resultSet.getString("book_status"));
                 book.setBook_cover(resultSet.getString("book_cover"));
 
@@ -123,7 +107,6 @@ public class BookController {
             while (resultSet.next()) {
                 Book book = new Book();
                 book.setBook_id(resultSet.getInt("book_id"));
-                // book.setBook_cover(resultSet.getString("book_cover"));
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
                 book.setCategory(resultSet.getString("category"));
@@ -152,15 +135,10 @@ public class BookController {
                 book.setBook_title(resultSet.getString("book_title"));
                 book.setAuthor(resultSet.getString("author"));
                 book.setPublication_year(resultSet.getString("publication_year"));
-                // book.setPublication_year(resultSet.getInt("publication_year"));
-                // book.setPublication_year(resultSet.getDate("publication_year"));
-                // book.setGenre(GenreEnum.valueOf(resultSet.getString("genre")));
                 book.setGenre(resultSet.getString("genre"));
-                // book.setCategory(CategoryBookEnum.valueOf(resultSet.getString("category")));
                 book.setCategory(resultSet.getString("category"));
                 book.setRating(resultSet.getDouble("rating"));
                 book.setSinopsis(resultSet.getString("sinopsis"));
-                // book.setBook_status(BookStatusEnum.valueOf(resultSet.getString("book_status")));
                 book.setBook_status(resultSet.getString("book_status"));
                 book.setBook_cover(resultSet.getString("book_cover"));
 
@@ -227,19 +205,13 @@ public class BookController {
         conn.connect();
         String query = "SELECT b.book_cover, b.book_title FROM favorite f JOIN book b ON f.book_id = b.book_id WHERE f.id = " + id;
         ArrayList<Book> books = new ArrayList<>();
-        // PreparedStatement statement = connection.prepareStatement(query);
-        // statement.setInt(1, userId);
         try {
             Statement statement = conn.con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Book book = new Book();
-                //book.setBook_id(resultSet.getInt("book_id"));
                 book.setBook_cover(resultSet.getString("book_cover"));
                 book.setBook_title(resultSet.getString("book_title"));
-                // book.setAuthor(resultSet.getString("author"));
-                // book.setCategory(resultSet.getString("category"));
-                // book.setBook_status(resultSet.getString("book_status"));
 
                 books.add(book);
             }
@@ -249,35 +221,24 @@ public class BookController {
         return books;
     }
 
-    // public ArrayList<Person> getComment(int chapter_id) {
-    //     conn.connect();
-    //     //String query = "SELECT person.username, comment.comment_content FROM person JOIN comment ON person.id = comment.id";
-    //     String query = "SELECT person.username, comment.comment_content FROM person JOIN comment ON person.id = comment.id WHERE comment.chapter_id = " + chapter_id;
-    //     ArrayList<Person> coment = new ArrayList<>();
-    //     // PreparedStatement statement = connection.prepareStatement(query);
-    //     // statement.setInt(1, userId);
-    //     try {
-    //         Statement statement = conn.con.createStatement();
-    //         ResultSet resultSet = statement.executeQuery(query);
-    //         while (resultSet.next()) {
-    //             Person person = new Person();
-    //             Comment comment = new Comment();
-    //             person.setUsername(resultSet.getString("username"));
-    //             comment.setComment_content(resultSet.getString("comment_content"));
-    //             //Book book = new Book();
-    //             //book.setBook_id(resultSet.getInt("book_id"));
-    //             // book.setBook_cover(resultSet.getString("book_cover"));
-    //             // book.setBook_title(resultSet.getString("book_title"));
-    //             // book.setAuthor(resultSet.getString("author"));
-    //             // book.setCategory(resultSet.getString("category"));
-    //             // book.setBook_status(resultSet.getString("book_status"));
+    public ArrayList<Comment> getComment(int chapter_id) {
+        conn.connect();
+        String query = "SELECT comment_content FROM comment WHERE chapter_id = " + chapter_id;
+        ArrayList<Comment> comments = new ArrayList<>();
+        try {
+            Statement statement = conn.con.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                Comment comment = new Comment();
+                comment.setComment_content(resultSet.getString("comment_content"));
 
-    //             coment.add(person);
-    //             coment.add(comment);
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return books;
-    // }
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comments;
+    }
+
+    
 }

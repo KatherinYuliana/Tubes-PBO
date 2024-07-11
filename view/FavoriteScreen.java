@@ -1,90 +1,10 @@
 package view;
 
-// import javax.swing.JButton;
-// import javax.swing.JFrame;
-// import javax.swing.JPanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-// public class FavoriteScreen {
-//     public FavoriteScreen() {
-//         JFrame frame = new JFrame("Jadwal");
-//         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//         frame.setSize(800, 600);
-//         frame.setLayout(null);
-
-//         JPanel panel = new JPanel();
-//         panel.setLayout(null);
-//         panel.setBounds(0, 0, 800, 600);
-
-//         // Home button
-//         JButton homeButton = new JButton("Home");
-//         homeButton.setBounds(10, 10, 80, 30);
-//         panel.add(homeButton);
-
-//         homeButton.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 new HomeUser();
-//                 frame.setVisible(false);
-//             }
-//         });
-
-//         // Jadwal button
-//         JButton jadwalButton = new JButton("Jadwal");
-//         jadwalButton.setBounds(100, 10, 80, 30);
-//         panel.add(jadwalButton);
-
-//         jadwalButton.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 new ScheduleScreen();
-//                 frame.setVisible(false);
-//             }
-//         });
-
-//         // Favorit button
-//         JButton favoritButton = new JButton("Favorit");
-//         favoritButton.setBounds(190, 10, 80, 30);
-//         panel.add(favoritButton);
-
-//         favoritButton.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 new FavoriteScreen();
-//                 frame.setVisible(false);
-//             }
-//         });
-
-//         // Log out button
-//         JButton logoutButton = new JButton("Log out");
-//         logoutButton.setBounds(700, 10, 80, 30);
-//         panel.add(logoutButton);
-        
-//         logoutButton.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 new MenuAwal();
-//                 frame.setVisible(false);
-//             }
-//         });
-
-//         frame.add(panel);
-//         frame.setLocationRelativeTo(null);
-//         frame.setVisible(true);
-//     }
-
-//     public static void main(String[] args) {
-//         new FavoriteScreen();
-//     }
-// }
-
 import javax.swing.*;
-
 import controller.BookController;
 import model.Book;
-
 import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -182,7 +102,6 @@ public class FavoriteScreen {
 
     private void fetchAndDisplayFavorites(int id) {
         ArrayList<Book> showFavoriteBook = con.getFavoriteList(id);
-        //List<Book> favoriteBooks = getFavoriteBooksFromDatabase(id);
 
         if (showFavoriteBook.isEmpty()) {
             JLabel emptyLabel = new JLabel("Daftar List Kosong");
@@ -245,51 +164,8 @@ public class FavoriteScreen {
         return new ImageIcon(scaledImg);
     }
 
-    // private List<Book> getFavoriteBooksFromDatabase(int userId) {
-    //     List<Book> favoriteBooks = new ArrayList<>();
-
-    //     try {
-    //         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "username", "password");
-    //         String query = "SELECT book_cover, book_title FROM favorites WHERE user_id = ?";
-    //         PreparedStatement statement = connection.prepareStatement(query);
-    //         statement.setInt(1, userId);
-
-    //         ResultSet resultSet = statement.executeQuery();
-    //         while (resultSet.next()) {
-    //             String coverPath = resultSet.getString("book_cover");
-    //             String title = resultSet.getString("book_title");
-    //             favoriteBooks.add(new Book(coverPath, title));
-    //         }
-
-    //         resultSet.close();
-    //         statement.close();
-    //         connection.close();
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-
-    //     return favoriteBooks;
-    // }
-
     public static void main(String[] args) {
-        new FavoriteScreen(3); // Pass the user ID as argument
+        new FavoriteScreen(2); 
     }
 
-    // class Book {
-    //     private String coverPath;
-    //     private String title;
-
-    //     public Book(String coverPath, String title) {
-    //         this.coverPath = coverPath;
-    //         this.title = title;
-    //     }
-
-    //     public String getCoverPath() {
-    //         return coverPath;
-    //     }
-
-    //     public String getTitle() {
-    //         return title;
-    //     }
-    // }
 }

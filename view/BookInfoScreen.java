@@ -178,7 +178,8 @@ public class BookInfoScreen {
         chapter1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ChapterScreen(book_id, id);
+                int chapter_id = 1;
+                new ChapterScreen(book_id, id, chapter_id);
                 frame.dispose();
             }
         });
@@ -187,6 +188,15 @@ public class BookInfoScreen {
         JButton chapter2Button = new JButton("Chapter 2");
         chapter2Button.setBounds(50, 370, 700, 40);
         frame.add(chapter2Button);
+
+        chapter2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int chapter_id = 2;
+                new ChapterScreen(book_id, id, chapter_id);
+                frame.dispose();
+            }
+        });
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

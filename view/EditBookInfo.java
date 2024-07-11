@@ -132,21 +132,10 @@ public class EditBookInfo {
 
         ArrayList<Book> showAllBook = con.getBookInfo(id);
 
-        //Object[][] data = new Object[showAllBook.size()][4];
-
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
 
-            // String cover = book.getBook_cover();
-            // JLabel bookCover2 = new JLabel(scaleImage(cover, 150, 200));
-            // bookCover2.setBounds(50, 70, 150, 200);
-            // frame.add(bookCover2);
-
             String judul = book.getBook_title();
-            // JLabel titleLabel = new JLabel(judul);
-            // titleLabel.setBounds(220, 70, 500, 30);
-            // titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
-            // frame.add(titleLabel);
             titleField = new JTextField(judul);
             titleField.setBounds(170, 50, 300, 25);
             frame.add(titleField);
@@ -155,55 +144,31 @@ public class EditBookInfo {
             authorField = new JTextField(author);
             authorField.setBounds(170, 90, 300, 25);
             frame.add(authorField);
-            // JLabel authorLabel2 = new JLabel(author);
-            // authorLabel2.setBounds(265, 110, 200, 30);
-            // frame.add(authorLabel2);
 
             String tahun = book.getPublication_year().toString();
             yearField = new JTextField(tahun);
             yearField.setBounds(170, 130, 300, 25);
             frame.add(yearField);
-            // JLabel yearLabel2 = new JLabel(tahun);
-            // yearLabel2.setBounds(320, 130, 200, 30);
-            // frame.add(yearLabel2);
 
             String genre = book.getGenre();
             genreField = new JTextField(genre);
             genreField.setBounds(170, 170, 300, 25);
             frame.add(genreField);
-            // JLabel genreLabel2 = new JLabel(genre);
-            // genreLabel2.setBounds(265, 150, 200, 30);
-            // frame.add(genreLabel2);
-
            
             String kategori = book.getCategory();
-            // if (kategori == "Novel") {
-            //     CategoryBookEnum cat = CategoryBookEnum.NOVEL;
-            //     kategori = cat;
-            // }
             if (kategori.equals("Novel")) {
                 novelButton.setSelected(true);
             } else if (kategori.equals("Comic")) {
                 comicButton.setSelected(true);
             }
-            // JLabel categoryLabel2 = new JLabel(kategori);
-            // categoryLabel2.setBounds(280, 170, 200, 30);
-            // frame.add(categoryLabel2);
 
             //Double rating = book.getRating();
             String rating = String.valueOf(book.getRating());
             ratingField = new JTextField(rating);
             ratingField.setBounds(170, 250, 300, 25);
             frame.add(ratingField);
-            // JLabel ratingLabel2 = new JLabel(rating);
-            // ratingLabel2.setBounds(265, 190, 200, 30);
-            // frame.add(ratingLabel2);
 
             String status = book.getBook_status();
-            // JLabel statusLabel2 = new JLabel(status);
-            // statusLabel2.setBounds(265, 210, 200, 30);
-            // frame.add(statusLabel2);
-            //String status = user.getStatus_perkawinan();
             statusComboBox.setSelectedItem(status);
 
             String sinopsis = book.getSinopsis();
@@ -215,18 +180,6 @@ public class EditBookInfo {
             fileNameLabel = new JLabel(cover);
             fileNameLabel.setBounds(330, 470, 240, 25);
             frame.add(fileNameLabel);
-            // JLabel sinopsisLabel2 = new JLabel(sinopsis);
-            // sinopsisLabel2.setBounds(275, 230, 200, 30);
-            // frame.add(sinopsisLabel2);
-            // JLabel bookCover2 = new JLabel(cover);
-            // bookCover2.setBounds(50, 70, 150, 200);
-            // //bookCover2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            // frame.add(bookCover2);
-
-            // data[i][0] = book.getBook_id();
-            // data[i][1] = book.getBook_title();
-            // data[i][2] = book.getAuthor();
-            // data[i][3] = book.getCategory();
         }
 
         // Submit
@@ -240,7 +193,6 @@ public class EditBookInfo {
                 String book_title = titleField.getText();
                 String author = authorField.getText();
                 String year = yearField.getText();
-                //int year = Integer.parseInt(yearField.getText());
                 String genre = genreField.getText();
                 String category = novelButton.isSelected() ? "Novel" : "Comic";
                 double rating = Double.parseDouble(ratingField.getText());
@@ -248,20 +200,8 @@ public class EditBookInfo {
                 String book_status = (String) statusComboBox.getSelectedItem();
                 String book_cover = filePath;
 
-                // Blob book_cover = selectedFile.getAbsolutePath();
-                // byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
-                // Blob book_cover = new SerialBlob(fileContent);
-                // File selectedFile = new File("path/to/your/book_cover.jpg");
-                // FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                // Blob book_cover = connection.createBlob();
-                // book_cover.setBinaryStream(1, fileInputStream, (int) selectedFile.length());
-
-                //ArrayList<Book> listBook = con.getAllBookList();
-                //boolean listBook = con.editBookInfo(id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
-                //Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
-                        //book_cover);
                 boolean cek = con.editBookInfo(id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
-                //boolean cek = con.addNewBook(newBook);
+                
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Buku Berhasil Diedit", "Success",
                             JOptionPane.WARNING_MESSAGE);
@@ -286,8 +226,6 @@ public class EditBookInfo {
                 frame.setVisible(false);
             }
         });
-        
-        //System.out.println(id);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

@@ -12,6 +12,12 @@ public class Comment {
         this.comment_content = comment_content;
     }
     
+    public Comment(int comment_id, int id, int chapter_id, String comment_content, int i) {
+        //this.id = id;
+        this.comment_id = comment_id;
+        this.comment_content = comment_content;
+    }
+
     public int getComment_id() {
         return comment_id;
     }

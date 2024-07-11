@@ -21,7 +21,7 @@ public class ChapterScreen {
         }
     }
 
-    public ChapterScreen(int book_id, int id) {
+    public ChapterScreen(int book_id, int id, int chapter_id) {
         JFrame frame = new JFrame("Chapter Screen");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +78,7 @@ public class ChapterScreen {
         lihatKomentarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CommentsSectionGUI();
+                new CommentScreen(id, chapter_id);
             }
         });
 
@@ -91,6 +91,7 @@ public class ChapterScreen {
     public static void main(String[] args) {
         int book_id = 2;
         int id = 2;
-        new ChapterScreen(book_id, id);
+        int chapter_id = 1;
+        new ChapterScreen(book_id, id, chapter_id);
     }
 }
