@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.BookController;
 import model.Book;
+import model.Chapter;
 import model.Enum.CategoryBookEnum;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class EditBook {
         return new ImageIcon(scaledImg);
     }
 
-    public EditBook(int id) {
+    public EditBook(int book_id, int admin_id) {
         JFrame frame = new JFrame("Book Info");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +37,7 @@ public class EditBook {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeAdmin();
+                new HomeAdmin(admin_id);
                 frame.dispose();
                 //frame.setVisible(false);
             }
@@ -86,10 +87,10 @@ public class EditBook {
 
         // Sinopsis label
         JLabel sinopsisLabel = new JLabel("Sinopsis:");
-        sinopsisLabel.setBounds(220, 230, 200, 30);
+        sinopsisLabel.setBounds(220, 230, 500, 30);
         frame.add(sinopsisLabel);
 
-        // Add to favorite button
+        // Add to chapter button
         JButton addChapterButton = new JButton("Tambah Chapter");
         addChapterButton.setBounds(50, 280, 150, 30);
         frame.add(addChapterButton);
@@ -97,12 +98,13 @@ public class EditBook {
         addChapterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // favoriteButton.setEnabled(false);
+                new AddChapterForm(book_id, admin_id);
+                frame.dispose();
             }
         });
 
        
-        ArrayList<Book> showAllBook = con.getBookInfo(id);
+        ArrayList<Book> showAllBook = con.getBookInfo(book_id, "");
 
         //Object[][] data = new Object[showAllBook.size()][4];
 
@@ -157,7 +159,7 @@ public class EditBook {
 
             String sinopsis = book.getSinopsis();
             JLabel sinopsisLabel2 = new JLabel(sinopsis);
-            sinopsisLabel2.setBounds(275, 230, 200, 30);
+            sinopsisLabel2.setBounds(275, 230, 500, 30);
             frame.add(sinopsisLabel2);
             // JLabel bookCover2 = new JLabel(cover);
             // bookCover2.setBounds(50, 70, 150, 200);
@@ -170,23 +172,47 @@ public class EditBook {
             // data[i][3] = book.getCategory();
         }
 
-        // Chapter 1 button
-        JButton chapter1Button = new JButton("Chapter 1");
-        chapter1Button.setBounds(50, 320, 700, 40);
-        frame.add(chapter1Button);
+        ArrayList<Chapter> showChapter = con.getChapter(book_id);
+        int y = 320;
+        for (int i = 0; i < showChapter.size(); i++) {
+            Chapter chapter = showChapter.get(i);
 
-        // Chapter 2 button
-        JButton chapter2Button = new JButton("Chapter 2");
-        chapter2Button.setBounds(50, 370, 700, 40);
-        frame.add(chapter2Button);
+            String judul_chapter = chapter.getChapter_title();
+            JButton chapterButton = new JButton(judul_chapter);
+            chapterButton.setBounds(50, y, 700, 40);
+            frame.add(chapterButton);
+
+            y += 50;
+
+            chapterButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int chapter_id = chapter.getChapter_id();
+                    //int chapter_id = 1;
+                    new ChapterScreen(book_id, admin_id, chapter_id);
+                    frame.dispose();
+                }
+            });
+        }
+
+        // Chapter 1 button
+        // JButton chapter1Button = new JButton("Chapter 1");
+        // chapter1Button.setBounds(50, 320, 700, 40);
+        // frame.add(chapter1Button);
+
+        // // Chapter 2 button
+        // JButton chapter2Button = new JButton("Chapter 2");
+        // chapter2Button.setBounds(50, 370, 700, 40);
+        // frame.add(chapter2Button);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        int id = 2;
+        int book_id = 1;
+        int id = 1;
         //String title = "Sherlock Holmes";
-        new EditBook(id);
+        new EditBook(book_id, id);
     }
 }

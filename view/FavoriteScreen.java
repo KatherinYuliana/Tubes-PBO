@@ -15,7 +15,7 @@ public class FavoriteScreen {
     private JPanel favoritePanel;
     BookController con = BookController.getInstance();
 
-    public FavoriteScreen(int id) {
+    public FavoriteScreen(int user_id) {
         frame = new JFrame("Favorite Screen");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class FavoriteScreen {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeUser(id);
+                new HomeUser(user_id);
                 frame.setVisible(false);
             }
         });
@@ -43,7 +43,7 @@ public class FavoriteScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int book_id = 2;
-                new ScheduleScreen(book_id, id);
+                new ScheduleScreen(book_id, user_id);
                 frame.setVisible(false);
             }
         });
@@ -56,7 +56,7 @@ public class FavoriteScreen {
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FavoriteScreen(id);
+                new FavoriteScreen(user_id);
                 frame.dispose();
                 //frame.setVisible(false);
             }
@@ -90,18 +90,18 @@ public class FavoriteScreen {
 
         // Scroll pane for favorite books
         JScrollPane scrollPane = new JScrollPane(favoritePanel);
-        scrollPane.setBounds(10, 90, 760, 250);
+        scrollPane.setBounds(10, 90, 760, 360);
         frame.add(scrollPane);
 
         // Fetch and display favorite books
-        fetchAndDisplayFavorites(id);
+        fetchAndDisplayFavorites(user_id);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void fetchAndDisplayFavorites(int id) {
-        ArrayList<Book> showFavoriteBook = con.getFavoriteList(id);
+    private void fetchAndDisplayFavorites(int user_id) {
+        ArrayList<Book> showFavoriteBook = con.getFavoriteList(user_id);
 
         if (showFavoriteBook.isEmpty()) {
             JLabel emptyLabel = new JLabel("Daftar List Kosong");

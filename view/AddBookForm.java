@@ -32,7 +32,7 @@ public class AddBookForm {
 
     BookController con = BookController.getInstance();
 
-    public AddBookForm() {
+    public AddBookForm(int admin_id) {
         frame = new JFrame("Add Book");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -166,7 +166,7 @@ public class AddBookForm {
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Buku Berhasil Ditambah", "Success",
                             JOptionPane.WARNING_MESSAGE);
-                    new HomeAdmin();
+                    new HomeAdmin(admin_id);
                     frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Buku Gagal Ditambah", "Error",
@@ -183,7 +183,7 @@ public class AddBookForm {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeAdmin();
+                new HomeAdmin(admin_id);
                 frame.dispose();
                 //frame.setVisible(false);
             }
@@ -194,6 +194,7 @@ public class AddBookForm {
     }
 
     public static void main(String[] args) {
-        new AddBookForm();
+        int admin_id = 1;
+        new AddBookForm(admin_id);
     }
 }

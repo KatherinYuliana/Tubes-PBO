@@ -31,7 +31,7 @@ public class ScheduleScreen {
         return new ImageIcon(scaledImg);
     }
 
-    public ScheduleScreen(int book_id, int id) {
+    public ScheduleScreen(int book_id, int user_id) {
         frame = new JFrame("Jadwal");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +49,7 @@ public class ScheduleScreen {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeUser(id);
+                new HomeUser(user_id);
                 frame.setVisible(false);
             }
         });
@@ -62,7 +62,7 @@ public class ScheduleScreen {
         jadwalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ScheduleScreen(book_id, id);
+                new ScheduleScreen(book_id, user_id);
                 frame.setVisible(false);
             }
         });
@@ -75,7 +75,7 @@ public class ScheduleScreen {
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FavoriteScreen(id);
+                new FavoriteScreen(user_id);
                 frame.setVisible(false);
             }
         });
@@ -128,7 +128,7 @@ public class ScheduleScreen {
                         book_id = no;
                         //System.out.println(book_id);
                         //String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -181,7 +181,7 @@ public class ScheduleScreen {
                         book_id = no;
                         //System.out.println(book_id);
                         //String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -233,7 +233,7 @@ public class ScheduleScreen {
                         book_id = no;
                         //System.out.println(book_id);
                         //String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -276,7 +276,7 @@ public class ScheduleScreen {
                         frame.dispose();
                         int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -319,7 +319,7 @@ public class ScheduleScreen {
                         frame.dispose();
                         int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -362,7 +362,7 @@ public class ScheduleScreen {
                         frame.dispose();
                         int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -405,7 +405,7 @@ public class ScheduleScreen {
                         frame.dispose();
                         int book_id = 4;
                         // String title = "One Piece";
-                        new BookInfoScreen(book_id, id);
+                        new BookInfoScreen(book_id, user_id, "");
                     }
                     @Override
                     public void mousePressed(MouseEvent e) {

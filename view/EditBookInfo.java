@@ -33,7 +33,7 @@ public class EditBookInfo {
 
     BookController con = BookController.getInstance();
 
-    public EditBookInfo(int id) {
+    public EditBookInfo(int admin_id, int book_id) {
         frame = new JFrame("Edit Book");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -130,7 +130,7 @@ public class EditBookInfo {
             }
         });
 
-        ArrayList<Book> showAllBook = con.getBookInfo(id);
+        ArrayList<Book> showAllBook = con.getBookInfo(book_id, "");
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
@@ -200,12 +200,12 @@ public class EditBookInfo {
                 String book_status = (String) statusComboBox.getSelectedItem();
                 String book_cover = filePath;
 
-                boolean cek = con.editBookInfo(id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
+                boolean cek = con.editBookInfo(book_id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
                 
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Buku Berhasil Diedit", "Success",
                             JOptionPane.WARNING_MESSAGE);
-                    new HomeAdmin();
+                    new HomeAdmin(admin_id);
                     frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Buku Gagal Diedit", "Error",
@@ -222,7 +222,7 @@ public class EditBookInfo {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HomeAdmin();
+                new HomeAdmin(admin_id);
                 frame.setVisible(false);
             }
         });
@@ -232,7 +232,8 @@ public class EditBookInfo {
     }
 
     public static void main(String[] args) {
-        int id = 2;
-        new EditBookInfo(id);
+        int book_id = 2;
+        int admin_id = 1;
+        new EditBookInfo(admin_id, book_id);
     }
 }

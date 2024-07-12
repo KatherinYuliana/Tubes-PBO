@@ -81,13 +81,15 @@ public class LoginScreen {
                     //System.out.println(loggedInUser.getId());
                     frame.dispose();
                     JOptionPane.showMessageDialog(null, "Selamat Datang " + username);
-                    int id = loggedInUser.getId();
-                    new HomeUser(id);
+                    int user_id = ((User)loggedInUser).getUser_id();
+                    //int id = loggedInUser.getId();
+                    new HomeUser(user_id);
                     //new HomeUser((User) loggedInUser);
                 } else if (loggedInUser instanceof Admin) {
                     frame.dispose();
                     JOptionPane.showMessageDialog(null, "Selamat Datang Admin");
-                    new HomeAdmin();
+                    int admin_id = ((Admin)loggedInUser).getAdmin_id();
+                    new HomeAdmin(admin_id);
                     //new HomeAdmin((Admin) loggedInUser);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Username atau password salah", "User not found",

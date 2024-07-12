@@ -5,12 +5,22 @@ public class Chapter {
     private String chapter_title;
     private String chapter_content;
 
+    public Chapter() {
+
+    }
+
     public Chapter(int chapter_id, String chapter_title, String chapter_content) {
         this.chapter_id = chapter_id;
         this.chapter_title = chapter_title;
         this.chapter_content = chapter_content;
     }
     
+    public Chapter(int chapter_id, int book_id, String chapter_title, String chapter_content, int i) {
+        this.chapter_id = chapter_id;
+        this.chapter_title = chapter_title;
+        this.chapter_content = chapter_content;
+    }
+
     public int getChapter_id() {
         return chapter_id;
     }

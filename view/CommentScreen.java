@@ -17,7 +17,7 @@ public class CommentScreen {
     BookController con = BookController.getInstance();
     UserController con2 = UserController.getInstance();
 
-    public CommentScreen(int id, int chapter_id) {
+    public CommentScreen(int user_id, int chapter_id) {
         JFrame frame = new JFrame("Comments Section");
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -78,14 +78,14 @@ public class CommentScreen {
                 String komen = textField.getText();
 
                 ArrayList<Comment> listComment = con.getComment(chapter_id);
-                Comment newComment = new Comment(0, id, chapter_id, komen, listComment.size() + 1);
+                Comment newComment = new Comment(0, user_id, chapter_id, komen, listComment.size() + 1);
                 // Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
                 //         book_cover, listBook.size() + 1);
-                boolean cek = con2.addComment(newComment, id, chapter_id);
+                boolean cek = con2.addComment(newComment, user_id, chapter_id);
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Komentar berhasil dikirim", "Success",
                             JOptionPane.WARNING_MESSAGE);
-                    new CommentScreen(id, chapter_id);
+                    new CommentScreen(user_id, chapter_id);
                     frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Komentar gagal terkirim", "Error",

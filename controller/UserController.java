@@ -97,13 +97,13 @@ public class UserController {
         return users;
     }
 
-    public boolean addComment(Comment comment, int id, int chapter_id) {
+    public boolean addComment(Comment comment, int user_id, int chapter_id) {
         conn.connect();
         String query = "INSERT INTO comment VALUES(?,?,?,?)";
         try {
             PreparedStatement statement = conn.con.prepareStatement(query);
             statement.setInt(1, comment.getComment_id());
-            statement.setInt(2, id);
+            statement.setInt(2, user_id);
             statement.setInt(3, chapter_id);
             statement.setString(4, comment.getComment_content());
 
@@ -124,13 +124,13 @@ public class UserController {
         }
     }
 
-    public boolean addFavorite(Favorite favorite, int id, int book_id) {
+    public boolean addFavorite(Favorite favorite, int user_id, int book_id) {
         conn.connect();
         String query = "INSERT INTO favorite VALUES(?,?,?)";
         try {
             PreparedStatement statement = conn.con.prepareStatement(query);
             statement.setInt(1, favorite.getFavorite_id());
-            statement.setInt(2, id);
+            statement.setInt(2, user_id);
             statement.setInt(3, book_id);
 
             // Execute the SQL statement
