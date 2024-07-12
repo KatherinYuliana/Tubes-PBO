@@ -1,13 +1,10 @@
 package view;
 
-import javax.swing.*;
-
 import controller.BookController;
 import controller.UserController;
-import model.Book;
 import model.Comment;
 import model.Person;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +43,7 @@ public class CommentScreen {
                 JPanel komenPanel = new JPanel();
                 komenPanel.setLayout(null);
                 komenPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                komenPanel.setBounds(20, 50, 30, 30); 
+                komenPanel.setBounds(20, 50, 30, 30);
                 komenPanel.setBackground(color2);
 
                 Comment comment = showComment.get(i);
@@ -76,11 +73,9 @@ public class CommentScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String komen = textField.getText();
-
                 ArrayList<Comment> listComment = con.getComment(chapter_id);
                 Comment newComment = new Comment(0, user_id, chapter_id, komen, listComment.size() + 1);
-                // Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
-                //         book_cover, listBook.size() + 1);
+
                 boolean cek = con2.addComment(newComment, user_id, chapter_id);
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Komentar berhasil dikirim", "Success",
@@ -98,9 +93,9 @@ public class CommentScreen {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int id = 2;
-        int chapter_id = 2;
-        new CommentScreen(id, chapter_id);
-    }
+    // public static void main(String[] args) {
+    // int id = 2;
+    // int chapter_id = 2;
+    // new CommentScreen(id, chapter_id);
+    // }
 }

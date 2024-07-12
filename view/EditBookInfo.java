@@ -1,33 +1,21 @@
 package view;
 
-import javax.print.DocFlavor.STRING;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
-import javax.swing.*;
-
 import controller.BookController;
 import model.Book;
-import model.User;
-import model.Enum.CategoryBookEnum;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.*;
 import java.util.ArrayList;
 
 public class EditBookInfo {
-    private Connection connection;
     private JFrame frame;
     private JTextField titleField, authorField, yearField, genreField, ratingField;
     private JTextArea synopsisArea;
     private JRadioButton novelButton, comicButton;
     private JComboBox<String> statusComboBox;
-    private JLabel coverLabel, fileNameLabel;
+    private JLabel fileNameLabel;
     private File selectedFile;
     private String filePath;
 
@@ -49,25 +37,21 @@ public class EditBookInfo {
         JLabel titleLabel = new JLabel("Judul Buku:");
         titleLabel.setBounds(10, 50, 150, 25);
         frame.add(titleLabel);
-        
 
         // Author
         JLabel authorLabel = new JLabel("Author:");
         authorLabel.setBounds(10, 90, 150, 25);
         frame.add(authorLabel);
-        
 
         // Tahun Terbit
         JLabel yearLabel = new JLabel("Tahun Terbit:");
         yearLabel.setBounds(10, 130, 150, 25);
         frame.add(yearLabel);
-        
 
         // Genre
         JLabel genreLabel = new JLabel("Genre:");
         genreLabel.setBounds(10, 170, 150, 25);
         frame.add(genreLabel);
-        
 
         // Kategori
         JLabel categoryLabel = new JLabel("Kategori:");
@@ -88,13 +72,11 @@ public class EditBookInfo {
         JLabel ratingLabel = new JLabel("Rating:");
         ratingLabel.setBounds(10, 250, 150, 25);
         frame.add(ratingLabel);
-        
 
         // Sinopsis
         JLabel synopsisLabel = new JLabel("Sinopsis:");
         synopsisLabel.setBounds(10, 290, 150, 25);
         frame.add(synopsisLabel);
-        
 
         // Status
         JLabel statusLabel = new JLabel("Status Buku:");
@@ -154,7 +136,7 @@ public class EditBookInfo {
             genreField = new JTextField(genre);
             genreField.setBounds(170, 170, 300, 25);
             frame.add(genreField);
-           
+
             String kategori = book.getCategory();
             if (kategori.equals("Novel")) {
                 novelButton.setSelected(true);
@@ -162,7 +144,6 @@ public class EditBookInfo {
                 comicButton.setSelected(true);
             }
 
-            //Double rating = book.getRating();
             String rating = String.valueOf(book.getRating());
             ratingField = new JTextField(rating);
             ratingField.setBounds(170, 250, 300, 25);
@@ -200,8 +181,9 @@ public class EditBookInfo {
                 String book_status = (String) statusComboBox.getSelectedItem();
                 String book_cover = filePath;
 
-                boolean cek = con.editBookInfo(book_id, book_title, author, year, genre, category, rating, sinopsis, book_status, book_cover);
-                
+                boolean cek = con.editBookInfo(book_id, book_title, author, year, genre, category, rating, sinopsis,
+                        book_status, book_cover);
+
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Buku Berhasil Diedit", "Success",
                             JOptionPane.WARNING_MESSAGE);
@@ -218,7 +200,7 @@ public class EditBookInfo {
         JButton backButton = new JButton("Back");
         backButton.setBounds(700, 10, 80, 30);
         frame.add(backButton);
-        
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -231,9 +213,9 @@ public class EditBookInfo {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int book_id = 2;
-        int admin_id = 1;
-        new EditBookInfo(admin_id, book_id);
-    }
+    // public static void main(String[] args) {
+    // int book_id = 2;
+    // int admin_id = 1;
+    // new EditBookInfo(admin_id, book_id);
+    // }
 }

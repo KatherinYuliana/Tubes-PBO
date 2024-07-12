@@ -48,7 +48,7 @@ public class MenuAwal {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MenuAwal();
-    }
+    // public static void main(String[] args) {
+    // new MenuAwal();
+    // }
 }

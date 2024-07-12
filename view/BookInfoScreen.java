@@ -1,14 +1,11 @@
 package view;
 
-import javax.swing.*;
-
 import controller.BookController;
 import controller.UserController;
 import model.Book;
 import model.Chapter;
 import model.Favorite;
-import model.Enum.CategoryBookEnum;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import java.awt.event.ActionEvent;
 public class BookInfoScreen {
     BookController con = BookController.getInstance();
     UserController con2 = UserController.getInstance();
-    // CategoryBookEnum category;
 
     private static ImageIcon scaleImage(String imagePath, int width, int height) {
         ImageIcon icon = new ImageIcon(imagePath);
@@ -42,7 +38,6 @@ public class BookInfoScreen {
             public void actionPerformed(ActionEvent e) {
                 new HomeUser(user_id);
                 frame.dispose();
-                // frame.setVisible(false);
             }
         });
 
@@ -51,12 +46,6 @@ public class BookInfoScreen {
         bookCover.setBounds(50, 70, 150, 200);
         bookCover.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         frame.add(bookCover);
-
-        // Book title
-        // JLabel titleLabel = new JLabel("Judul buku");
-        // titleLabel.setBounds(220, 70, 200, 30);
-        // titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        // frame.add(titleLabel);
 
         // Author label
         JLabel authorLabel = new JLabel("Author:");
@@ -101,57 +90,25 @@ public class BookInfoScreen {
         favoriteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // String bookId = "someBookId"; // Replace with actual book ID
-                // ArrayList<Favorite> cekList = con.cekFavoriteList(user_id);
-                // for (int i = 0; i < cekList.size(); i++) {
-                //     Favorite favorite = cekList.get(i);
-                // int book_id = favorite.
-                // boolean cekList = con.cekFavoriteList(book_id);
-                // if (cekList) {
-                //     favoriteButton.setEnabled(false);
-                // } else {
-                    // addBookToFavorites(bookId);
-                    
-                    ArrayList<Book> listFavorite = con.getFavoriteList(user_id);
-                    Favorite newFavorite = new Favorite(0, user_id, book_id, listFavorite.size() + 1);
-                    // Book newBook = new Book(0, book_title, author, year, genre, category, rating,
-                    // sinopsis, book_status,
-                    // book_cover, listBook.size() + 1);
-                    boolean cek = con2.addFavorite(newFavorite, user_id, book_id);
-                    if (cek) {
-                        JOptionPane.showMessageDialog(frame, "Buku ditambahkan ke favorit", "Success",
-                                JOptionPane.WARNING_MESSAGE);
-                                favoriteButton.setEnabled(false);
-                        // new EditBook(book_id, user_id);
-                        // frame.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(frame, "Buku gagal ditambah ke favorit", "Error",
-                                JOptionPane.WARNING_MESSAGE);
-                    }
-                    //JOptionPane.showMessageDialog(frame, "Buku ditambahkan ke favorit");
-                //}
+                ArrayList<Book> listFavorite = con.getFavoriteList(user_id);
+                Favorite newFavorite = new Favorite(0, user_id, book_id, listFavorite.size() + 1);
+
+                boolean cek = con2.addFavorite(newFavorite, user_id, book_id);
+                if (cek) {
+                    JOptionPane.showMessageDialog(frame, "Buku ditambahkan ke favorit", "Success",
+                            JOptionPane.WARNING_MESSAGE);
+                    favoriteButton.setEnabled(false);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Buku gagal ditambah ke favorit", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
-            //}
         });
 
-        // favoriteButton.addActionListener(new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // favoriteButton.setEnabled(false);
-        // }
-        // });
-        // Book book1 = new Book();
-        // int book_id2 = book1.getBook_id();
         ArrayList<Book> showAllBook = con.getBookInfo(book_id, book_title);
-        // System.out.println(book_id2);
-
-        // System.out.println(book_title);
-
-        // Object[][] data = new Object[showAllBook.size()][4];
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
-            System.out.println(book.getBook_id());
 
             String cover = book.getBook_cover();
             JLabel bookCover2 = new JLabel(scaleImage(cover, 150, 200));
@@ -180,14 +137,10 @@ public class BookInfoScreen {
             frame.add(genreLabel2);
 
             String kategori = book.getCategory();
-            // if (kategori == "Novel") {
-            // kategori = CategoryBookEnum.NOVEL;
-            // }
             JLabel categoryLabel2 = new JLabel(kategori);
             categoryLabel2.setBounds(280, 170, 200, 30);
             frame.add(categoryLabel2);
 
-            // Double rating = book.getRating();
             String rating = String.valueOf(book.getRating());
             JLabel ratingLabel2 = new JLabel(rating);
             ratingLabel2.setBounds(265, 190, 200, 30);
@@ -202,17 +155,7 @@ public class BookInfoScreen {
             JLabel sinopsisLabel2 = new JLabel(sinopsis);
             sinopsisLabel2.setBounds(275, 230, 500, 30);
             frame.add(sinopsisLabel2);
-            // JLabel bookCover2 = new JLabel(cover);
-            // bookCover2.setBounds(50, 70, 150, 200);
-            // //bookCover2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            // frame.add(bookCover2);
-
-            // data[i][0] = book.getBook_id();
-            // data[i][1] = book.getBook_title();
-            // data[i][2] = book.getAuthor();
-            // data[i][3] = book.getCategory();
         }
-        
 
         ArrayList<Chapter> showChapter = con.getChapter(book_id);
         int y = 320;
@@ -230,50 +173,20 @@ public class BookInfoScreen {
             chapterButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // int chapter_id = 1;
-                    // System.out.println("chapter id " + chapter_id);
                     new ChapterScreen(book_id, user_id, chapter_id);
                     frame.dispose();
                 }
             });
         }
 
-        // // Chapter 1 button
-        // JButton chapter1Button = new JButton("Chapter 1");
-        // chapter1Button.setBounds(50, 320, 700, 40);
-        // frame.add(chapter1Button);
-
-        // chapter1Button.addActionListener(new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // int chapter_id = 1;
-        // new ChapterScreen(book_id, id, chapter_id);
-        // frame.dispose();
-        // }
-        // });
-
-        // // Chapter 2 button
-        // JButton chapter2Button = new JButton("Chapter 2");
-        // chapter2Button.setBounds(50, 370, 700, 40);
-        // frame.add(chapter2Button);
-
-        // chapter2Button.addActionListener(new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // int chapter_id = 2;
-        // new ChapterScreen(book_id, id, chapter_id);
-        // frame.dispose();
-        // }
-        // });
-
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int book_id = 1;
-        int user_id = 5;
-        String book_title = "Harry Potter";
-        new BookInfoScreen(book_id, user_id, book_title);
-    }
+    // public static void main(String[] args) {
+    // int book_id = 1;
+    // int user_id = 5;
+    // String book_title = "Harry Potter";
+    // new BookInfoScreen(book_id, user_id, book_title);
+    // }
 }

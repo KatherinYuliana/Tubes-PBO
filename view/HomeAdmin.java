@@ -2,47 +2,20 @@ package view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import controller.Account;
 import controller.BookController;
 import model.Book;
-import model.User;
-
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class HomeAdmin {
-    // private Connection connection;
     private JFrame frame;
     private JLabel editLabel, tambahLabel, hapusLabel;
-    private JTable table;
-    private DefaultTableModel tableModel;
-    BookController con = BookController.getInstance();
-    private Connection connection;
-    private JTextField titleField, authorField, yearField, genreField, ratingField, editField, tambahField, hapusField;
-    private JTextArea synopsisArea;
-    private JRadioButton novelButton, comicButton;
-    private JComboBox<String> statusComboBox;
-    private JLabel coverLabel, fileNameLabel;
+    private JTextField editField, tambahField, hapusField;
     private JButton editButton2, tambahButton, hapusButton;
-    private File selectedFile;
-    private String filePath;
+    BookController con = BookController.getInstance();
     Book book = new Book();
-
-    private JLabel[] imageLabels;
-
-    private static ImageIcon scaleImage(String imagePath, int width, int height) {
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image img = icon.getImage();
-        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(scaledImg);
-    }
 
     public HomeAdmin(int admin_id) {
         frame = new JFrame("Menu Admin");
@@ -66,7 +39,7 @@ public class HomeAdmin {
         frame.add(menuLabel);
 
         ArrayList<Book> showAllBook = con.getAllBookAdmin();
-        String[] columnNames = { "ID", "Judul Buku", "Author", "Category" , "Status"};
+        String[] columnNames = { "ID", "Judul Buku", "Author", "Category", "Status" };
 
         Object[][] data = new Object[showAllBook.size()][5];
 
@@ -109,15 +82,15 @@ public class HomeAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeOldComponents();
-                
+
                 editLabel = new JLabel("Masukkan id buku yang mau di edit:");
                 editLabel.setBounds(10, 330, 250, 25);
                 frame.add(editLabel);
-                
+
                 editField = new JTextField(15);
                 editField.setBounds(10, 360, 165, 25);
                 frame.add(editField);
-                
+
                 editButton2 = new JButton("Cari");
                 editButton2.setBounds(10, 390, 70, 20);
                 frame.add(editButton2);
@@ -144,15 +117,15 @@ public class HomeAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeOldComponents();
-                
+
                 tambahLabel = new JLabel("Masukkan id buku:");
                 tambahLabel.setBounds(10, 330, 250, 25);
                 frame.add(tambahLabel);
-                
+
                 tambahField = new JTextField(15);
                 tambahField.setBounds(10, 360, 165, 25);
                 frame.add(tambahField);
-                
+
                 tambahButton = new JButton("Cari");
                 tambahButton.setBounds(10, 390, 70, 20);
                 frame.add(tambahButton);
@@ -182,11 +155,11 @@ public class HomeAdmin {
                 hapusLabel = new JLabel("Masukkan id buku yang mau di hapus:");
                 hapusLabel.setBounds(10, 330, 250, 25);
                 frame.add(hapusLabel);
-                
+
                 hapusField = new JTextField(15);
                 hapusField.setBounds(10, 360, 165, 25);
                 frame.add(hapusField);
-                
+
                 hapusButton = new JButton("Hapus");
                 hapusButton.setBounds(10, 390, 70, 20);
                 frame.add(hapusButton);
@@ -197,14 +170,18 @@ public class HomeAdmin {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int book_id = Integer.parseInt(hapusField.getText());
-                        int confirm = JOptionPane.showConfirmDialog(frame, "Apakah Anda yakin ingin menghapus buku dengan ID " + book_id + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+                        int confirm = JOptionPane.showConfirmDialog(frame,
+                                "Apakah Anda yakin ingin menghapus buku dengan ID " + book_id + "?", "Konfirmasi Hapus",
+                                JOptionPane.YES_NO_OPTION);
                         if (confirm == JOptionPane.YES_OPTION) {
                             boolean success = con.deleteBook(book_id);
                             if (success) {
-                                JOptionPane.showMessageDialog(frame, "Buku berhasil dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(frame, "Buku berhasil dihapus", "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
                                 new HomeAdmin(admin_id);
                             } else {
-                                JOptionPane.showMessageDialog(frame, "Gagal menghapus buku", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(frame, "Gagal menghapus buku", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     }
@@ -220,27 +197,36 @@ public class HomeAdmin {
                 frame.dispose();
             }
         });
-        
+
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private void removeOldComponents() {
-        if (editLabel != null) frame.remove(editLabel);
-        if (editField != null) frame.remove(editField);
-        if (editButton2 != null) frame.remove(editButton2);
+        if (editLabel != null)
+            frame.remove(editLabel);
+        if (editField != null)
+            frame.remove(editField);
+        if (editButton2 != null)
+            frame.remove(editButton2);
 
-        if (tambahLabel != null) frame.remove(tambahLabel);
-        if (tambahField != null) frame.remove(tambahField);
-        if (tambahButton != null) frame.remove(tambahButton);
+        if (tambahLabel != null)
+            frame.remove(tambahLabel);
+        if (tambahField != null)
+            frame.remove(tambahField);
+        if (tambahButton != null)
+            frame.remove(tambahButton);
 
-        if (hapusLabel != null) frame.remove(hapusLabel);
-        if (hapusField != null) frame.remove(hapusField);
-        if (hapusButton != null) frame.remove(hapusButton);
+        if (hapusLabel != null)
+            frame.remove(hapusLabel);
+        if (hapusField != null)
+            frame.remove(hapusField);
+        if (hapusButton != null)
+            frame.remove(hapusButton);
     }
 
-    public static void main(String[] args) {
-        int id = 1;
-        new HomeAdmin(id);
-    }
+    // public static void main(String[] args) {
+    // int id = 1;
+    // new HomeAdmin(id);
+    // }
 }

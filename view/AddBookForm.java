@@ -1,32 +1,21 @@
 package view;
 
-import javax.print.DocFlavor.STRING;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
-import javax.swing.*;
-
 import controller.BookController;
 import model.Book;
-import model.User;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.*;
 import java.util.ArrayList;
 
 public class AddBookForm {
-    private Connection connection;
     private JFrame frame;
     private JTextField titleField, authorField, yearField, genreField, ratingField;
     private JTextArea synopsisArea;
     private JRadioButton novelButton, comicButton;
     private JComboBox<String> statusComboBox;
-    private JLabel coverLabel, fileNameLabel;
+    private JLabel fileNameLabel;
     private File selectedFile;
     private String filePath;
 
@@ -179,13 +168,12 @@ public class AddBookForm {
         JButton backButton = new JButton("Back");
         backButton.setBounds(700, 10, 80, 30);
         frame.add(backButton);
-        
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new HomeAdmin(admin_id);
                 frame.dispose();
-                //frame.setVisible(false);
             }
         });
 
@@ -193,8 +181,8 @@ public class AddBookForm {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int admin_id = 1;
-        new AddBookForm(admin_id);
-    }
+    // public static void main(String[] args) {
+    // int admin_id = 1;
+    // new AddBookForm(admin_id);
+    // }
 }

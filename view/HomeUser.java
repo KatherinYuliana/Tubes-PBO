@@ -7,11 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import controller.BookController;
 import model.Book;
-import model.Chapter;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.Image;
 
 public class HomeUser {
-
     BookController con = BookController.getInstance();
 
     private static ImageIcon scaleImage(String imagePath, int width, int height) {
@@ -101,12 +97,9 @@ public class HomeUser {
                 } else {
                     Book book = searchBook.get(0);
                     int book_id = book.getBook_id();
-                    // JOptionPane.showMessageDialog(frame, "Buku ditemukan", "Success",
-                    // JOptionPane.INFORMATION_MESSAGE);
                     new BookInfoScreen(book_id, user_id, book_title);
                     frame.dispose();
                 }
-
             }
         });
 
@@ -123,13 +116,10 @@ public class HomeUser {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Book book = new Book();
-
                 frame.dispose();
                 int no = 4;
                 int book_id = book.getBook_id();
                 book_id = no;
-                // System.out.println(book_id);
-                // String title = "One Piece";
                 new BookInfoScreen(book_id, user_id, "");
             }
 
@@ -150,7 +140,6 @@ public class HomeUser {
             }
         });
 
-        // JLabel image2 = new JLabel("Sherlock Holmes");
         JLabel image2 = new JLabel(scaleImage("pictures/novel/Sherlock Holmes.jpg", 100, 150));
         image2.setBounds(200, 160, 100, 150);
         panel.add(image2);
@@ -158,19 +147,11 @@ public class HomeUser {
         image2.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // frame.dispose();
-                // int book_id = 3;
-                // //String title = "";
-                // new BookInfoScreen(book_id, id);
-
                 Book book = new Book();
-
                 frame.dispose();
                 int no = 3;
                 int book_id = book.getBook_id();
                 book_id = no;
-                // System.out.println(book_id);
-                // String title = "One Piece";
                 new BookInfoScreen(book_id, user_id, "");
             }
 
@@ -191,9 +172,37 @@ public class HomeUser {
             }
         });
 
-        JLabel image3 = new JLabel("gambar 3");
+        JLabel image3 = new JLabel(scaleImage("pictures/comic/Kimetsu no Yaiba.jpg", 100, 150));
         image3.setBounds(350, 160, 100, 150);
         panel.add(image3);
+
+        image3.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Book book = new Book();
+                frame.dispose();
+                int no = 10;
+                int book_id = book.getBook_id();
+                book_id = no;
+                new BookInfoScreen(book_id, user_id, "");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
 
         // Popular list book
         JLabel popularLabel = new JLabel("Daftar populer");
@@ -207,19 +216,11 @@ public class HomeUser {
         image4.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // frame.dispose();
-                // int book_id = 1;
-                // //String title = "";
-                // new BookInfoScreen(book_id, id);
-
                 Book book = new Book();
-
                 frame.dispose();
                 int no = 1;
                 int book_id = book.getBook_id();
                 book_id = no;
-                // System.out.println(book_id);
-                // String title = "One Piece";
                 new BookInfoScreen(book_id, user_id, "");
             }
 
@@ -240,28 +241,19 @@ public class HomeUser {
             }
         });
 
-        // JLabel image5 = new JLabel("gambar 5");
-        // image5.setBounds(200, 370, 100, 150);
-        // panel.add(image5);
         JLabel image5 = new JLabel(scaleImage("pictures/novel/Bumi.jpg", 100, 150));
-        image4.setBounds(200, 370, 100, 150);
+        image5.setBounds(200, 370, 100, 150);
         panel.add(image5);
 
         image5.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // frame.dispose();
-                // int book_id = 1;
-                // //String title = "";
-                // new BookInfoScreen(book_id, id);
-
-                // Book book = new Book();
-
-                // frame.dispose();
-                // int no = 1;
-                // int book_id = book.getBook_id();
-                // book_id = no;
-                // new BookInfoScreen(book_id, user_id, "");
+                Book book = new Book();
+                frame.dispose();
+                int no = 8;
+                int book_id = book.getBook_id();
+                book_id = no;
+                new BookInfoScreen(book_id, user_id, "");
             }
 
             @Override
@@ -299,8 +291,8 @@ public class HomeUser {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int id = 2;
-        new HomeUser(id);
-    }
+    // public static void main(String[] args) {
+    // int id = 2;
+    // new HomeUser(id);
+    // }
 }

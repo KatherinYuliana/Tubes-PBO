@@ -1,29 +1,13 @@
 package controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
 import model.Book;
 import model.Chapter;
 import model.Comment;
-import model.Favorite;
-import model.Person;
-import model.User;
-import model.Enum.BookStatusEnum;
-import model.Enum.CategoryBookEnum;
-import model.Enum.GenreEnum;
 
 public class BookController {
     private static BookController instance;
@@ -39,10 +23,10 @@ public class BookController {
         return instance;
     }
 
+    // menambah buku baru (admin)
     public boolean addNewBook(Book book) {
         conn.connect();
         String query = "INSERT INTO book VALUES(?,?,?,?,?,?,?,?,?,?)";
-
         try {
             PreparedStatement statement = conn.con.prepareStatement(query);
             statement.setInt(1, book.getBook_id());
@@ -73,6 +57,7 @@ public class BookController {
         }
     }
 
+    // mengambil semua list buku
     public ArrayList<Book> getAllBookList() {
         conn.connect();
         String query = "SELECT * FROM book";
@@ -101,6 +86,7 @@ public class BookController {
         return books;
     }
 
+    // menampilkan semua list buku untuk admin
     public ArrayList<Book> getAllBookAdmin() {
         conn.connect();
         String query = "SELECT book_id, book_title, author, category, book_status FROM book";
@@ -124,9 +110,9 @@ public class BookController {
         return books;
     }
 
+    // menampilkan informasi buku
     public ArrayList<Book> getBookInfo(int book_id, String book_title) {
         conn.connect();
-        //String query = "SELECT * FROM book WHERE book_id = '" + book_id + "'";
         String query = "SELECT * FROM book WHERE book_id = " + book_id + " OR book_title = '" + book_title + "'";
         ArrayList<Book> books = new ArrayList<>();
         try {
@@ -153,6 +139,7 @@ public class BookController {
         return books;
     }
 
+    // mengedit informasi buku (admin)
     public boolean editBookInfo(int book_id, String book_title, String author, String publication_year, String genre,
             String category, Double rating, String sinopsis, String book_status, String book_cover) {
         conn.connect();
@@ -178,38 +165,13 @@ public class BookController {
         }
     }
 
-    // public boolean deleteBook(int book_id) {
-    //     try {
-    //         String query = "DELETE FROM book WHERE id = ?";
-    //         PreparedStatement statement = conn.con.prepareStatement(query);
-    //         statement.setInt(1, book_id);
-    //         statement.executeUpdate();
-
-    //         // // Refresh the table data
-    //         // tableModel.setRowCount(0);
-    //         // loadData();
-    //         // Check if the insertion was successful
-    //         // Execute the SQL statement
-    //         int rowsAffected = statement.executeUpdate();
-    //         if (rowsAffected > 0) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         return false;
-    //     } finally {
-    //         conn.disconnect();
-    //     }
-    // }
-
+    // menghapus buku (admin)
     public boolean deleteBook(int book_id) {
         try {
             String query = "DELETE FROM book WHERE book_id = ?";
             PreparedStatement statement = conn.con.prepareStatement(query);
             statement.setInt(1, book_id);
-    
+
             // Execute the SQL statement and check if the deletion was successful
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -220,11 +182,12 @@ public class BookController {
             conn.disconnect();
         }
     }
-    
 
+    // menampilkan list favorit
     public ArrayList<Book> getFavoriteList(int user_id) {
         conn.connect();
-        String query = "SELECT b.book_cover, b.book_title FROM favorite f JOIN book b ON f.book_id = b.book_id WHERE f.id = " + user_id;
+        String query = "SELECT b.book_cover, b.book_title FROM favorite f JOIN book b ON f.book_id = b.book_id WHERE f.id = "
+                + user_id;
         ArrayList<Book> books = new ArrayList<>();
         try {
             Statement statement = conn.con.createStatement();
@@ -246,7 +209,6 @@ public class BookController {
         boolean exists = false;
         try {
             String query = "SELECT COUNT(*) FROM favorite WHERE book_id = " + book_id;
-            //String query = "SELECT book_id FROM favorite WHERE id = " + user_id;
             PreparedStatement preparedStatement = conn.con.prepareStatement(query);
             preparedStatement.setInt(1, book_id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -259,27 +221,7 @@ public class BookController {
         return exists;
     }
 
-    // public ArrayList<Favorite> cekFavoriteList(int user_id) {
-    //     conn.connect();
-    //     String query = "SELECT book_id FROM favorite WHERE id = " + user_id;
-    //     ArrayList<Favorite> favorites = new ArrayList<>();
-    //     try {
-    //         Statement statement = conn.con.createStatement();
-    //         ResultSet resultSet = statement.executeQuery(query);
-    //         while (resultSet.next()) {
-    //             Favorite favorite = new Favorite();
-    //             favorite.setFavorite_id(resultSet.getInt("favorite_id"));
-    //             // Comment comment = new Comment();
-    //             // comment.setComment_content(resultSet.getString("comment_content"));
-
-    //             favorites.add(favorite);
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return favorites;
-    // }
-
+    // menampilkan komentar
     public ArrayList<Comment> getComment(int chapter_id) {
         conn.connect();
         String query = "SELECT comment_content FROM comment WHERE chapter_id = " + chapter_id;
@@ -299,12 +241,13 @@ public class BookController {
         return comments;
     }
 
+    // menambah chapter baru (admin)
     public boolean addChapter(Chapter chapter, int book_id) {
         conn.connect();
         String query = "INSERT INTO chapter VALUES(?,?,?,?)";
         try {
             PreparedStatement statement = conn.con.prepareStatement(query);
-            
+
             statement.setInt(1, chapter.getChapter_id());
             statement.setInt(2, book_id);
             statement.setString(3, chapter.getChapter_title());
@@ -327,6 +270,7 @@ public class BookController {
         }
     }
 
+    // menampilkan chapter
     public ArrayList<Chapter> getChapter(int book_id) {
         conn.connect();
         String query = "SELECT chapter_id, chapter_title, chapter_content FROM chapter WHERE book_id = " + book_id;
@@ -348,16 +292,17 @@ public class BookController {
         return chapters;
     }
 
+    // menampilkan isi chapter
     public ArrayList<Chapter> getChapterContent(int book_id, int chapter_id) {
         conn.connect();
-        String query = "SELECT chapter_title, chapter_content FROM chapter WHERE book_id = " + book_id + " AND chapter_id = " + chapter_id;
+        String query = "SELECT chapter_title, chapter_content FROM chapter WHERE book_id = " + book_id
+                + " AND chapter_id = " + chapter_id;
         ArrayList<Chapter> chapters = new ArrayList<>();
         try {
             Statement statement = conn.con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Chapter chapter = new Chapter();
-                //chapter.setChapter_id(resultSet.getInt("chapter_id"));
                 chapter.setChapter_title(resultSet.getString("chapter_title"));
                 chapter.setChapter_content(resultSet.getString("chapter_content"));
 

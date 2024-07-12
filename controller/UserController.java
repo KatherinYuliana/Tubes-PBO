@@ -13,7 +13,6 @@ import model.User;
 
 public class UserController {
     private static UserController instance;
-
     static DatabaseHandler conn = new DatabaseHandler();
 
     public UserController() {
@@ -27,6 +26,7 @@ public class UserController {
         return instance;
     }
 
+    // menambah user baru saat registrasi
     public boolean addNewUser(User user) {
         conn.connect();
         String query = "INSERT INTO person VALUES(?,?,?,?,?)";
@@ -78,6 +78,7 @@ public class UserController {
         return users;
     }
 
+    // menampilkan nama user yang berkomentar
     public ArrayList<Person> getUserComment(int chapter_id) {
         conn.connect();
         String query = "SELECT person.username FROM person JOIN comment ON person.id = comment.id WHERE comment.chapter_id = " + chapter_id;
@@ -97,6 +98,7 @@ public class UserController {
         return users;
     }
 
+    // menambahkan komentar
     public boolean addComment(Comment comment, int user_id, int chapter_id) {
         conn.connect();
         String query = "INSERT INTO comment VALUES(?,?,?,?)";
@@ -124,6 +126,7 @@ public class UserController {
         }
     }
 
+    // menambahkan list buku favorit
     public boolean addFavorite(Favorite favorite, int user_id, int book_id) {
         conn.connect();
         String query = "INSERT INTO favorite VALUES(?,?,?)";

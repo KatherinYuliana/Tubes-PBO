@@ -4,7 +4,6 @@ public class Favorite {
     private int favorite_id;
 
     public Favorite() {
-        
     }
 
     public Favorite(int favorite_id) {
@@ -21,6 +20,5 @@ public class Favorite {
 
     public void setFavorite_id(int favorite_id) {
         this.favorite_id = favorite_id;
-    }
-    
+    }    
 }

@@ -1,12 +1,9 @@
 package view;
 
-import javax.swing.*;
-
 import controller.BookController;
 import model.Book;
 import model.Chapter;
-import model.Enum.CategoryBookEnum;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,7 +11,6 @@ import java.awt.event.ActionEvent;
 
 public class EditBook {
     BookController con = BookController.getInstance();
-    //CategoryBookEnum category;
 
     private static ImageIcon scaleImage(String imagePath, int width, int height) {
         ImageIcon icon = new ImageIcon(imagePath);
@@ -39,7 +35,6 @@ public class EditBook {
             public void actionPerformed(ActionEvent e) {
                 new HomeAdmin(admin_id);
                 frame.dispose();
-                //frame.setVisible(false);
             }
         });
 
@@ -48,12 +43,6 @@ public class EditBook {
         bookCover.setBounds(50, 70, 150, 200);
         bookCover.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         frame.add(bookCover);
-
-        // Book title
-        // JLabel titleLabel = new JLabel("Judul buku");
-        // titleLabel.setBounds(220, 70, 200, 30);
-        // titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        // frame.add(titleLabel);
 
         // Author label
         JLabel authorLabel = new JLabel("Author:");
@@ -79,7 +68,7 @@ public class EditBook {
         JLabel ratingLabel = new JLabel("Rating:");
         ratingLabel.setBounds(220, 190, 200, 30);
         frame.add(ratingLabel);
-        
+
         // Status label
         JLabel statusLabel = new JLabel("Status:");
         statusLabel.setBounds(220, 210, 200, 30);
@@ -103,10 +92,7 @@ public class EditBook {
             }
         });
 
-       
         ArrayList<Book> showAllBook = con.getBookInfo(book_id, "");
-
-        //Object[][] data = new Object[showAllBook.size()][4];
 
         for (int i = 0; i < showAllBook.size(); i++) {
             Book book = showAllBook.get(i);
@@ -137,16 +123,11 @@ public class EditBook {
             genreLabel2.setBounds(265, 150, 200, 30);
             frame.add(genreLabel2);
 
-           
             String kategori = book.getCategory();
-            // if (kategori == "Novel") {
-            //     kategori = CategoryBookEnum.NOVEL;
-            // }
             JLabel categoryLabel2 = new JLabel(kategori);
             categoryLabel2.setBounds(280, 170, 200, 30);
             frame.add(categoryLabel2);
 
-            //Double rating = book.getRating();
             String rating = String.valueOf(book.getRating());
             JLabel ratingLabel2 = new JLabel(rating);
             ratingLabel2.setBounds(265, 190, 200, 30);
@@ -161,15 +142,6 @@ public class EditBook {
             JLabel sinopsisLabel2 = new JLabel(sinopsis);
             sinopsisLabel2.setBounds(275, 230, 500, 30);
             frame.add(sinopsisLabel2);
-            // JLabel bookCover2 = new JLabel(cover);
-            // bookCover2.setBounds(50, 70, 150, 200);
-            // //bookCover2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            // frame.add(bookCover2);
-
-            // data[i][0] = book.getBook_id();
-            // data[i][1] = book.getBook_title();
-            // data[i][2] = book.getAuthor();
-            // data[i][3] = book.getCategory();
         }
 
         ArrayList<Chapter> showChapter = con.getChapter(book_id);
@@ -184,35 +156,23 @@ public class EditBook {
 
             y += 50;
 
-            chapterButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int chapter_id = chapter.getChapter_id();
-                    //int chapter_id = 1;
-                    new ChapterScreen(book_id, admin_id, chapter_id);
-                    frame.dispose();
-                }
-            });
+            // chapterButton.addActionListener(new ActionListener() {
+            // @Override
+            // public void actionPerformed(ActionEvent e) {
+            // int chapter_id = chapter.getChapter_id();
+            // new ChapterScreen(book_id, admin_id, chapter_id);
+            // frame.dispose();
+            // }
+            // });
         }
-
-        // Chapter 1 button
-        // JButton chapter1Button = new JButton("Chapter 1");
-        // chapter1Button.setBounds(50, 320, 700, 40);
-        // frame.add(chapter1Button);
-
-        // // Chapter 2 button
-        // JButton chapter2Button = new JButton("Chapter 2");
-        // chapter2Button.setBounds(50, 370, 700, 40);
-        // frame.add(chapter2Button);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int book_id = 1;
-        int id = 1;
-        //String title = "Sherlock Holmes";
-        new EditBook(book_id, id);
-    }
+    // public static void main(String[] args) {
+    // int book_id = 1;
+    // int id = 1;
+    // new EditBook(book_id, id);
+    // }
 }

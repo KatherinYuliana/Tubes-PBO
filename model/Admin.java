@@ -4,7 +4,6 @@ public class Admin extends Person{
     private int admin_id;
 
     public Admin() {
-
     }
 
     public Admin(int id, String username, String email, String password, String status, int admin_id) {

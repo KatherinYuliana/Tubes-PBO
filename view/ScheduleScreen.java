@@ -3,26 +3,22 @@ package view;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import controller.BookController;
 import model.Book;
-
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ScheduleScreen {
-
     private JFrame frame;
     private JLabel image1;
-    private JLabel[] imageLabels;
-    private HashMap<String, String[]> dayImages;
+    BookController con = BookController.getInstance();
 
     private static ImageIcon scaleImage(String imagePath, int width, int height) {
         ImageIcon icon = new ImageIcon(imagePath);
@@ -36,10 +32,6 @@ public class ScheduleScreen {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
-
-        // JPanel panel = new JPanel();
-        // panel.setLayout(null);
-        // panel.setBounds(0, 0, 800, 600);
 
         // Home button
         JButton homeButton = new JButton("Home");
@@ -92,6 +84,17 @@ public class ScheduleScreen {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String book_title = searchField.getText();
+                ArrayList<Book> searchBook = con.getBookInfo(0, book_title);
+                if (searchBook.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Buku yang dicari tidak ada", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    Book book = searchBook.get(0);
+                    int book_id = book.getBook_id();
+                    new BookInfoScreen(book_id, user_id, book_title);
+                    frame.dispose();
+                }
 
             }
         });
@@ -115,30 +118,26 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        // frame.dispose();
-                        // int book_id = 4;
-                        // // String title = "One Piece";
-                        // new BookInfoScreen(book_id, id);
-
                         Book book = new Book();
-
                         frame.dispose();
                         int no = 4;
                         int book_id = book.getBook_id();
                         book_id = no;
-                        //System.out.println(book_id);
-                        //String title = "One Piece";
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -168,30 +167,26 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        // frame.dispose();
-                        // int book_id = 2;
-                        // // String title = "One Piece";
-                        // new BookInfoScreen(book_id, id);
-
                         Book book = new Book();
-
                         frame.dispose();
                         int no = 2;
                         int book_id = book.getBook_id();
                         book_id = no;
-                        //System.out.println(book_id);
-                        //String title = "One Piece";
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -220,30 +215,26 @@ public class ScheduleScreen {
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        // frame.dispose();
-                        // int book_id = 5;
-                        // // String title = "One Piece";
-                        // new BookInfoScreen(book_id, id);
-
                         Book book = new Book();
-
                         frame.dispose();
                         int no = 5;
                         int book_id = book.getBook_id();
                         book_id = no;
-                        //System.out.println(book_id);
-                        //String title = "One Piece";
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -266,27 +257,33 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Kimetsu no Yaiba.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        Book book = new Book();
                         frame.dispose();
-                        int book_id = 4;
-                        // String title = "One Piece";
+                        int no = 10;
+                        int book_id = book.getBook_id();
+                        book_id = no;
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -309,27 +306,33 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Dreaming Freedom.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        Book book = new Book();
                         frame.dispose();
-                        int book_id = 4;
-                        // String title = "One Piece";
+                        int no = 11;
+                        int book_id = book.getBook_id();
+                        book_id = no;
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -352,27 +355,33 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Ao Haru Ride.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        Book book = new Book();
                         frame.dispose();
-                        int book_id = 4;
-                        // String title = "One Piece";
+                        int no = 12;
+                        int book_id = book.getBook_id();
+                        book_id = no;
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -395,27 +404,33 @@ public class ScheduleScreen {
                     frame.remove(image1);
                 }
 
-                image1 = new JLabel(scaleImage("pictures/comic/One Piece.jpg", 130, 200));
+                image1 = new JLabel(scaleImage("pictures/comic/Tower Of God.jpg", 130, 200));
                 image1.setBounds(10, 150, 130, 200);
                 frame.add(image1);
 
                 image1.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        Book book = new Book();
                         frame.dispose();
-                        int book_id = 4;
-                        // String title = "One Piece";
+                        int no = 13;
+                        int book_id = book.getBook_id();
+                        book_id = no;
                         new BookInfoScreen(book_id, user_id, "");
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
@@ -425,45 +440,6 @@ public class ScheduleScreen {
                 frame.repaint();
             }
         });
-
-        // Create buttons for days
-        // String[] days = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu",
-        // "Minggu"};
-        // int xPos = 10;
-        // for (String day : days) {
-        // JButton dayButton = new JButton(day);
-        // dayButton.setBounds(xPos, 100, 100, 30);
-        // dayButton.addActionListener(new DayButtonListener(day));
-        // panel.add(dayButton);
-        // xPos += 110;
-        // }
-
-        // Initialize labels to display images
-        // imageLabels = new JLabel[3];
-        // int imgXPos = 10;
-        // for (int i = 0; i < imageLabels.length; i++) {
-        // imageLabels[i] = new JLabel();
-        // imageLabels[i].setBounds(imgXPos, 150, 130, 200);
-        // panel.add(imageLabels[i]);
-        // imgXPos += 160;
-        // }
-
-        // Initialize day to image paths mapping
-        // dayImages = new HashMap<>();
-        // //dayImages.put("Senin", new String[]{"pictures/One Piece.jpg",
-        // "pictures/Jujutsu Kaisen.jpg", "path/to/senin3.jpg"});
-        // dayImages.put("Selasa", new String[]{"pictures/Sherlock Holmes.jpg",
-        // "path/to/selasa2.jpg", "path/to/selasa3.jpg"});
-        // dayImages.put("Rabu", new String[]{"path/to/rabu1.jpg", "path/to/rabu2.jpg",
-        // "path/to/rabu3.jpg"});
-        // dayImages.put("Kamis", new String[]{"path/to/kamis1.jpg",
-        // "path/to/kamis2.jpg", "path/to/kamis3.jpg"});
-        // dayImages.put("Jumat", new String[]{"path/to/jumat1.jpg",
-        // "path/to/jumat2.jpg", "path/to/jumat3.jpg"});
-        // dayImages.put("Sabtu", new String[]{"path/to/sabtu1.jpg",
-        // "path/to/sabtu2.jpg", "path/to/sabtu3.jpg"});
-        // dayImages.put("Minggu", new String[]{"path/to/minggu1.jpg",
-        // "path/to/minggu2.jpg", "path/to/minggu3.jpg"});
 
         // Log out button
         JButton logoutButton = new JButton("Log out");
@@ -478,39 +454,13 @@ public class ScheduleScreen {
             }
         });
 
-        //frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    // Action listener class for day buttons
-    // private class DayButtonListener implements ActionListener {
-    //     private String day;
-
-    //     public DayButtonListener(String day) {
-    //         this.day = day;
-    //     }
-
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //         // Set the images based on the day
-    //         String[] images = dayImages.get(day);
-    //         for (int i = 0; i < imageLabels.length; i++) {
-    //             if (images != null && i < images.length) {
-    //                 ImageIcon imageIcon = new ImageIcon(images[i]);
-    //                 Image img = imageIcon.getImage();
-    //                 Image scaledImg = img.getScaledInstance(130, 200, Image.SCALE_SMOOTH);
-    //                 imageLabels[i].setIcon(new ImageIcon(scaledImg));
-    //             } else {
-    //                 imageLabels[i].setIcon(null);
-    //             }
-    //         }
-    //     }
+    // public static void main(String[] args) {
+    // int book_id = 2;
+    // int id = 2;
+    // new ScheduleScreen(book_id, id);
     // }
-
-    public static void main(String[] args) {
-        int book_id = 2;
-        int id = 2;
-        new ScheduleScreen(book_id, id);
-    }
 }

@@ -4,7 +4,6 @@ public class User extends Person{
     private int user_id;
 
     public User () {
-
     }
 
     public User(int id, String username, String email, String password, String status, int user_id) {
@@ -19,6 +18,4 @@ public class User extends Person{
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
-
-    
 }

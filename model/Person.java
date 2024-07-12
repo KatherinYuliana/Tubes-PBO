@@ -8,7 +8,6 @@ public class Person {
     private String status;
 
     public Person () {
-        
     }
 
     public Person(int id, String username, String email, String password, String status) {
@@ -58,5 +57,4 @@ public class Person {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

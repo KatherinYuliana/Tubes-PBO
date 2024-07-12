@@ -6,11 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import controller.BookController;
-import model.Book;
 import model.Chapter;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,8 +80,6 @@ public class AddChapterForm {
 
                 ArrayList<Chapter> listChapter = con.getChapter(book_id);
                 Chapter newChapter = new Chapter(0, book_id, title, file, listChapter.size() + 1);
-                // Book newBook = new Book(0, book_title, author, year, genre, category, rating, sinopsis, book_status,
-                //         book_cover, listBook.size() + 1);
                 boolean cek = con.addChapter(newChapter, book_id);
                 if (cek) {
                     JOptionPane.showMessageDialog(frame, "Chapter Berhasil Ditambah", "Success",
@@ -102,9 +97,9 @@ public class AddChapterForm {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        int book_id = 2;
-        int id = 1;
-        new AddChapterForm(book_id, id);
-    }
+    // public static void main(String[] args) {
+    // int book_id = 2;
+    // int id = 1;
+    // new AddChapterForm(book_id, id);
+    // }
 }

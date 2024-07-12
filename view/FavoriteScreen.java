@@ -6,14 +6,19 @@ import javax.swing.*;
 import controller.BookController;
 import model.Book;
 import java.awt.*;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavoriteScreen {
     private JFrame frame;
     private JPanel favoritePanel;
     BookController con = BookController.getInstance();
+
+    private static ImageIcon scaleImage(String imagePath, int width, int height) {
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
+    }
 
     public FavoriteScreen(int user_id) {
         frame = new JFrame("Favorite Screen");
@@ -58,7 +63,6 @@ public class FavoriteScreen {
             public void actionPerformed(ActionEvent e) {
                 new FavoriteScreen(user_id);
                 frame.dispose();
-                //frame.setVisible(false);
             }
         });
 
@@ -66,13 +70,12 @@ public class FavoriteScreen {
         JButton logoutButton = new JButton("Log out");
         logoutButton.setBounds(700, 10, 80, 30);
         frame.add(logoutButton);
-        
+
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MenuAwal();
                 frame.dispose();
-                //frame.setVisible(false);
             }
         });
 
@@ -83,9 +86,6 @@ public class FavoriteScreen {
 
         // Panel for favorite books
         favoritePanel = new JPanel();
-        // favoritePanel.setBounds(10, 80, 760, 460);
-        // frame.add(titleLabel);
-
         favoritePanel.setLayout(new BoxLayout(favoritePanel, BoxLayout.Y_AXIS));
 
         // Scroll pane for favorite books
@@ -115,57 +115,26 @@ public class FavoriteScreen {
                 bookPanel.setLayout(null); // Use null layout
                 bookPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 bookPanel.setBounds(10, 50, 740, 60); // Set bounds for book panel
-            
+
                 String cover = book.getBook_cover();
                 JLabel bookCover = new JLabel(scaleImage(cover, 80, 100));
                 bookCover.setBounds(10, 10, 80, 100); // Set bounds for book cover
                 bookPanel.add(bookCover);
-            
+
                 JLabel titleLabel = new JLabel(book.getBook_title());
                 titleLabel.setFont(new Font("Serif", Font.BOLD, 16));
                 titleLabel.setBounds(100, 40, 600, 30); // Set bounds for title label
                 bookPanel.add(titleLabel);
-            
+
                 favoritePanel.add(bookPanel);
             }
-            
-            // for (Book book : showFavoriteBook) {
-            //     JPanel bookPanel = new JPanel();
-            //     bookPanel.setLayout(new BoxLayout(bookPanel, BoxLayout.X_AXIS));
-            //     bookPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            //     bookPanel.setBounds(10, 50, 740, 100);
-            //     //bookPanel.setPreferredSize(new Dimension(740, 100));
-
-            //     String cover = book.getBook_cover();
-            //     JLabel bookCover = new JLabel(scaleImage(cover, 80, 100));
-            //     // bookCover.setBounds(50, 70, 150, 200);
-            //     // frame.add(bookCover);
-
-            //     // JLabel coverLabel = new JLabel(new ImageIcon(book.getBook_cover()));
-            //     bookCover.setPreferredSize(new Dimension(180, 300));
-            //     bookPanel.add(bookCover);
-
-            //     JLabel titleLabel = new JLabel(book.getBook_title());
-            //     titleLabel.setFont(new Font("Serif", Font.BOLD, 16));
-            //     bookPanel.add(titleLabel);
-
-            //     favoritePanel.add(bookPanel);
-            // }
         }
 
         favoritePanel.revalidate();
         favoritePanel.repaint();
     }
 
-    private static ImageIcon scaleImage(String imagePath, int width, int height) {
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image img = icon.getImage();
-        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(scaledImg);
-    }
-
-    public static void main(String[] args) {
-        new FavoriteScreen(2); 
-    }
-
+    // public static void main(String[] args) {
+    // new FavoriteScreen(5);
+    // }
 }

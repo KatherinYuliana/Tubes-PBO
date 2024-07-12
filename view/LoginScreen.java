@@ -6,24 +6,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import controller.Account;
 import model.Admin;
 import model.Person;
 import model.User;
-
 import javax.swing.JPasswordField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.ModuleLayer.Controller;
-import java.util.concurrent.Flow.Publisher;
 
 public class LoginScreen {
     Account con = Account.getInstance();
 
     public LoginScreen() {
-        //Account account = new Account();
-
         JFrame frame = new JFrame("Login Form");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
@@ -56,57 +50,27 @@ public class LoginScreen {
         loginButton.setBounds(150, 150, 100, 25);
         panel.add(loginButton);
 
-        // loginButton.addActionListener(new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // new HomeUser();
-        // frame.setVisible(false);
-        // }
-        // });
-
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 Person loggedInUser = con.getAccount(username, password);
 
-
                 if (loggedInUser instanceof User) {
-                    // if (loggedInUser.getStatus() == AccountStatus.BANNED) {
-                    //     JOptionPane.showMessageDialog(null, "This account is banned");
-                    //     return;
-                    // }
-                    //System.out.println(loggedInUser.getId());
                     frame.dispose();
                     JOptionPane.showMessageDialog(null, "Selamat Datang " + username);
-                    int user_id = ((User)loggedInUser).getUser_id();
-                    //int id = loggedInUser.getId();
+                    int user_id = loggedInUser.getId();
                     new HomeUser(user_id);
-                    //new HomeUser((User) loggedInUser);
                 } else if (loggedInUser instanceof Admin) {
                     frame.dispose();
                     JOptionPane.showMessageDialog(null, "Selamat Datang Admin");
-                    int admin_id = ((Admin)loggedInUser).getAdmin_id();
+                    int admin_id = loggedInUser.getId();
                     new HomeAdmin(admin_id);
-                    //new HomeAdmin((Admin) loggedInUser);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Username atau password salah", "User not found",
                             JOptionPane.WARNING_MESSAGE);
                 }
-
-                // Person person = access.getUser(usernameField.getText(),String.valueOf(passwordField.getPassword()));
-                // if (person != null) {
-                //     JOptionPane.showMessageDialog(null, "Login Sukses", "Info",
-                //     JOptionPane.INFORMATION_MESSAGE);
-                //     frame.dispose();
-                //     new HomeUser();
-                // } else {
-                //     JOptionPane.showMessageDialog(null, "Login Gagal. Email atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
-                //     frame.dispose();
-                // }
-
             }
         });
 
@@ -128,7 +92,7 @@ public class LoginScreen {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new LoginScreen();
-    }
+    // public static void main(String[] args) {
+    // new LoginScreen();
+    // }
 }

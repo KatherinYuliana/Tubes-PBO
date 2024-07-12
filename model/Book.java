@@ -1,12 +1,5 @@
 package model;
 
-import java.sql.Blob;
-import java.util.Date;
-
-import model.Enum.BookStatusEnum;
-import model.Enum.CategoryBookEnum;
-import model.Enum.GenreEnum;
-
 public class Book {
     private int book_id;
     private String book_title;
@@ -20,7 +13,6 @@ public class Book {
     private String book_cover;
 
     public Book() {
-
     }
 
     public Book(int book_id, String book_title, String author, String publication_year, String genre, String category,
@@ -131,11 +123,4 @@ public class Book {
     public void setBook_cover(String book_cover) {
         this.book_cover = book_cover;
     }
-
-    // public Blob getBook_cover() {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'getBook_cover'");
-    // }
-
 }
